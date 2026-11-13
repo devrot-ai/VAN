@@ -2,11 +2,12 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   id?: string;
+  variant?: "default" | "dark";
 };
 
-export default function Section({ children, className = "", id }: Props) {
+export default function Section({ children, className = "", id, variant }: Props) {
   return (
-    <section id={id} className={`section ${className}`.trim()}>
+    <section id={id} className={`section ${variant === "dark" ? "section--dark" : ""} ${className}`.trim()}>
       {children}
     </section>
   );

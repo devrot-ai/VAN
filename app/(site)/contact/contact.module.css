@@ -1,0 +1,85 @@
+.hero {
+  padding-block: var(--space-9) var(--space-8);
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--line);
+}
+.heroTitle {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 340;
+  letter-spacing: -0.015em;
+  max-width: 8ch;
+  line-height: 1.1;
+  margin-top: var(--space-3);
+}
+.heroLead {
+  font-size: var(--text-lg);
+  max-width: 56ch;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: var(--space-4);
+}
+.contactLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-9);
+  margin-top: var(--space-6);
+}
+.contactInfoTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: var(--space-5);
+}
+.enquiryList {
+  display: grid;
+  gap: var(--space-3);
+}
+.enquiryItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.95rem;
+  color: var(--text-strong);
+}
+.enquiryDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-green);
+  flex-shrink: 0;
+}
+.contactNote {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background: var(--color-cream);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.contactNote p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.contactFormWrap {
+  align-self: start;
+}
+.alternatives {
+  text-align: center;
+  display: grid;
+  gap: var(--space-5);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.alternativesTitle {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 340;
+  color: var(--text-on-dark);
+}
+.altActions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 900px) {
+  .contactLayout { grid-template-columns: 1fr; gap: var(--space-7); }
+}

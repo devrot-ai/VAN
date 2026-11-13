@@ -1,0 +1,710 @@
+/* ============================================================
+   VAN Product — Module Shared Styles
+   ============================================================ */
+
+/* ─── Page Header ─── */
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #202621;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.pageSubtitle {
+  font-size: 0.9rem;
+  color: #5f6a61;
+  margin: 0.25rem 0 0;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #173d32;
+  color: #eef2ec;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.actionBtn:hover {
+  background: #285c49;
+}
+
+.actionIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Stat Grid ─── */
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e9e2;
+  border-radius: 8px;
+}
+
+.statIcon {
+  width: 24px;
+  height: 24px;
+  color: #173d32;
+  flex-shrink: 0;
+}
+
+.statValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #202621;
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #5f6a61;
+  margin-top: 0.1rem;
+}
+
+.positive { color: #285c49 !important; }
+.negative { color: #b91c1c !important; }
+
+/* ─── Section ─── */
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #202621;
+  margin: 0 0 1rem;
+}
+
+/* ─── Fields Grid (Overview) ─── */
+
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.fieldCard {
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.fieldCard:hover {
+  box-shadow: 0 4px 12px rgba(23, 61, 50, 0.1);
+}
+
+.fieldCardTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.cropBadge {
+  font-size: 0.7rem;
+  text-transform: capitalize;
+}
+
+.fieldCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #5f6a61;
+}
+
+.stageBadge {
+  font-size: 0.7rem;
+  background: #e5e9e2;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  text-transform: capitalize;
+}
+
+.assessmentStatus {
+  font-size: 0.8rem;
+  color: #285c49;
+}
+
+.opsCount {
+  font-size: 0.75rem;
+  color: #5f6a61;
+}
+
+/* ─── Activity List ─── */
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e9e2;
+  border-radius: 6px;
+}
+
+.activityStatus {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.activityContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.activityTitle {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #202621;
+  text-transform: capitalize;
+}
+
+.activityMeta {
+  font-size: 0.75rem;
+  color: #5f6a61;
+  text-transform: capitalize;
+}
+
+.activityCost {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #202621;
+  white-space: nowrap;
+}
+
+/* ─── Farms Module ─── */
+
+.summaryCard {
+  margin-bottom: 1.5rem;
+}
+
+.farmSummaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.summaryLabel {
+  display: block;
+  font-size: 0.75rem;
+  color: #5f6a61;
+  margin-bottom: 0.2rem;
+}
+
+.summaryValue {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #202621;
+}
+
+.fieldsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e9e2;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fieldRow:hover {
+  border-color: #b7c9a8;
+  box-shadow: 0 2px 8px rgba(23, 61, 50, 0.06);
+}
+
+.fieldRowSelected {
+  border-color: #285c49;
+  background: #f0f5f0;
+}
+
+.fieldRowLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.fieldRowIcon {
+  width: 20px;
+  height: 20px;
+  color: #285c49;
+  flex-shrink: 0;
+}
+
+.fieldRowName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #202621;
+}
+
+.fieldRowMeta {
+  font-size: 0.8rem;
+  color: #5f6a61;
+  margin-top: 0.15rem;
+}
+
+.fieldRowRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stageIndicator {
+  font-size: 0.75rem;
+  color: #5f6a61;
+  background: #e5e9e2;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.explore3DBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem 0.6rem;
+  background: rgba(196, 138, 71, 0.1);
+  color: #8a5a23;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.explore3DBtn:hover {
+  background: rgba(196, 138, 71, 0.2);
+}
+
+.explore3DIcon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Field Detail */
+
+.fieldDetailCard {
+  margin-top: 1.5rem;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detailLabel {
+  display: block;
+  font-size: 0.75rem;
+  color: #5f6a61;
+  margin-bottom: 0.2rem;
+}
+
+.detailValue {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #202621;
+  text-transform: capitalize;
+}
+
+.detailSection {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e9e2;
+}
+
+.detailSection h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #202621;
+  margin: 0 0 0.75rem;
+}
+
+.detailOp {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detailOpType {
+  flex: 1;
+  text-transform: capitalize;
+  color: #202621;
+}
+
+.detailOpStatus {
+  text-transform: capitalize;
+  color: #5f6a61;
+}
+
+.detailOpDate {
+  color: #5f6a61;
+}
+
+/* ─── Land Intelligence ─── */
+
+.assessmentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+.assessmentTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.statusBadge {
+  font-size: 0.7rem;
+}
+
+.soilDataGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.soilDataItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.soilDataItemFull {
+  grid-column: 1 / -1;
+}
+
+.soilDataLabel {
+  font-size: 0.7rem;
+  color: #5f6a61;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.soilDataValue {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #202621;
+  text-transform: capitalize;
+}
+
+.suitabilityTags {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.pendingAssessment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  color: #5f6a61;
+}
+
+.pendingIcon {
+  width: 32px;
+  height: 32px;
+  color: #b7c9a8;
+}
+
+/* ─── Inputs Module ─── */
+
+.categorySummary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.categoryCard {
+  text-align: center;
+}
+
+.categoryIcon {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.categoryName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #202621;
+  text-transform: capitalize;
+}
+
+.categoryCount {
+  font-size: 0.75rem;
+  color: #5f6a61;
+}
+
+.productName {
+  font-weight: 500;
+}
+
+/* ─── Machinery Module ─── */
+
+.equipName {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.equipModel {
+  font-size: 0.75rem;
+  color: #5f6a61;
+}
+
+.teamsCard {
+  margin-top: 1.5rem;
+}
+
+.teamsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.teamCard {
+  padding: 1rem;
+  background: #f7f7f2;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.teamName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #202621;
+}
+
+.teamRole {
+  font-size: 0.8rem;
+  color: #5f6a61;
+}
+
+.teamJobs {
+  font-size: 0.75rem;
+  color: #5f6a61;
+}
+
+/* ─── Operations Module ─── */
+
+.opType {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.opNotes {
+  font-size: 0.75rem;
+  color: #5f6a61;
+  margin-top: 0.15rem;
+}
+
+/* ─── Finance Module ─── */
+
+.financeGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.costBreakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.costItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.costItemHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.costItemLabel {
+  color: #5f6a61;
+  text-transform: capitalize;
+}
+
+.costItemValue {
+  font-weight: 600;
+  color: #202621;
+}
+
+.costBar {
+  height: 6px;
+  background: #e5e9e2;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.costBarFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.costItemPct {
+  font-size: 0.7rem;
+  color: #5f6a61;
+  text-align: right;
+}
+
+.profitCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.profitResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+}
+
+.profitNumber {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #285c49;
+}
+
+.profitLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #202621;
+}
+
+.profitNote {
+  font-size: 0.75rem;
+  color: #5f6a61;
+  line-height: 1.5;
+}
+
+.transactionsCard {
+  margin-top: 0;
+}
+
+.amountPositive {
+  color: #285c49;
+  font-weight: 600;
+}
+
+.amountNegative {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 768px) {
+  .statGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fieldsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .assessmentsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .soilDataGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .financeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pageHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .fieldRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .fieldRowRight {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

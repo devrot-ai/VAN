@@ -6,11 +6,11 @@ import Button from "@/components/ui/Button";
 import styles from "./Site.module.css";
 
 const NAV = [
-  { label: "Platform", href: "/platform" },
-  { label: "Journey", href: "/journey" },
-  { label: "For farmers", href: "/for-farmers" },
-  { label: "For providers", href: "/for-providers" },
-  { label: "About", href: "/about" },
+  { label: "How it works", href: "/how-it-works" },
+  { label: "Product", href: "/product" },
+  { label: "3D Experience", href: "/journey" },
+  { label: "For Farmers", href: "/farmers" },
+  { label: "Company", href: "/company" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -54,11 +54,11 @@ export default function Header({ dark = false }: { dark?: boolean }) {
             </Link>
           ))}
           <div className={styles.navCta}>
-            <Button href="/auth/login" variant={dark ? "outlineDark" : "ghost"} size="sm">
-              Sign in
+            <Button href="/product" variant={dark ? "outlineDark" : "ghost"} size="sm">
+              Explore Demo
             </Button>
-            <Button href="/early-access" variant={dark ? "onDark" : "primary"} size="sm">
-              Get early access
+            <Button href="/contact" variant={dark ? "onDark" : "primary"} size="sm">
+              Contact VAN
             </Button>
           </div>
         </nav>

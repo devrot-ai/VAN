@@ -1,0 +1,205 @@
+/* How it works page styles */
+
+.hero {
+  padding-block: var(--space-9) var(--space-8);
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--line);
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 340;
+  letter-spacing: -0.015em;
+  max-width: 10ch;
+  line-height: 1.1;
+  margin-top: var(--space-3);
+}
+
+.heroLead {
+  font-size: var(--text-lg);
+  max-width: 56ch;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: var(--space-4);
+}
+
+/* Steps list */
+.stepsList {
+  display: grid;
+  gap: 0;
+  margin-top: var(--space-8);
+}
+
+.stepItem {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-6);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.stepNumber {
+  display: grid;
+  gap: var(--space-1);
+  padding-top: var(--space-1);
+}
+
+.stepNum {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-green);
+  font-variant-numeric: tabular-nums;
+}
+
+.stepPillar {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.stepTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.stepText {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 50ch;
+}
+
+/* Pillars grid */
+.sectionTitle {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-weight: 340;
+  letter-spacing: -0.01em;
+  color: var(--text-on-dark);
+  margin-top: var(--space-3);
+}
+
+.sectionLead {
+  color: rgba(238, 242, 236, 0.6);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-8);
+  max-width: 52ch;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.pillarCard {
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(238, 242, 236, 0.08);
+  border-radius: var(--radius);
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.pillarIndex {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-field);
+  font-variant-numeric: tabular-nums;
+}
+
+.pillarName {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-on-dark);
+}
+
+.pillarText {
+  font-size: 0.85rem;
+  color: rgba(238, 242, 236, 0.6);
+  line-height: 1.55;
+}
+
+/* Dual approach */
+.dualApproach {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.dualPanel {
+  padding: var(--space-6);
+  background: var(--surface-raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.dualPanelTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.dualPanelText {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.ctaRow {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+  flex-wrap: wrap;
+}
+
+/* Final CTA */
+.finalCta {
+  text-align: center;
+  display: grid;
+  gap: var(--space-4);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.finalCtaTitle {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 340;
+  color: var(--text-on-dark);
+}
+
+.finalCtaText {
+  font-size: var(--text-base);
+  color: rgba(238, 242, 236, 0.6);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pillarsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dualApproach {
+    grid-template-columns: 1fr;
+  }
+  .stepItem {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 620px) {
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+  .heroTitle {
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+  }
+}

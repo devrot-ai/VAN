@@ -1,0 +1,104 @@
+.hero {
+  padding-block: var(--space-9) var(--space-8);
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--line);
+}
+.heroTitle {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 340;
+  letter-spacing: -0.015em;
+  max-width: 10ch;
+  line-height: 1.1;
+  margin-top: var(--space-3);
+}
+.heroLead {
+  font-size: var(--text-lg);
+  max-width: 56ch;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: var(--space-4);
+}
+.sectionTitle {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-weight: 340;
+  letter-spacing: -0.01em;
+  margin-top: var(--space-3);
+}
+.sectionTitleDark { color: var(--text-on-dark); }
+.sectionLead {
+  color: var(--text-muted);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-8);
+  max-width: 52ch;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+.sectionLeadDark { color: rgba(238, 242, 236, 0.6); }
+.partnersGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+.partnerCard {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-4);
+}
+.partnerTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+.partnerText {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.howItWorks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-7);
+}
+.howStep {
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(238, 242, 236, 0.08);
+  border-radius: var(--radius);
+}
+.howNum {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-field);
+}
+.howTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-on-dark);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.howText {
+  font-size: 0.85rem;
+  color: rgba(238, 242, 236, 0.6);
+  line-height: 1.55;
+}
+.finalCta {
+  text-align: center;
+  display: grid;
+  gap: var(--space-4);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.finalCtaTitle {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 340;
+}
+.finalCtaText {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+@media (max-width: 900px) {
+  .partnersGrid { grid-template-columns: 1fr; }
+  .howItWorks { grid-template-columns: 1fr; }
+}

@@ -1,36 +1,37 @@
+/**
+ * VAN — Footer Component
+ *
+ * Professional footer with navigation links, company info, and legal.
+ */
+
 import Link from "next/link";
 import { Logo } from "./Header";
 import styles from "./Site.module.css";
 
-const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
-  {
-    title: "Platform",
-    links: [
-      { label: "Farm intelligence", href: "/platform/farm-intelligence" },
-      { label: "Machinery", href: "/platform/machinery" },
-      { label: "Services & labour", href: "/platform/services" },
-      { label: "Harvest & logistics", href: "/platform/harvest-logistics" },
-      { label: "Finance & commerce", href: "/platform/finance-commerce" },
-      { label: "Connected hardware", href: "/platform/connected-hardware" },
-    ],
-  },
-  {
-    title: "Who it’s for",
-    links: [
-      { label: "Independent farmers", href: "/for-farmers" },
-      { label: "Equipment owners", href: "/for-providers" },
-      { label: "Service providers", href: "/for-providers" },
-      { label: "Cooperatives", href: "/for-cooperatives" },
-    ],
-  },
+const FOOTER_LINKS = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" },
-      { label: "Early access", href: "/early-access" },
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
+      { label: "How it works", href: "/how-it-works" },
+      { label: "Company", href: "/company" },
+      { label: "For Farmers", href: "/farmers" },
+      { label: "Partners", href: "/partners" },
+      { label: "Insights", href: "/insights" },
+    ],
+  },
+  {
+    title: "Experience",
+    links: [
+      { label: "Product Demo", href: "/product" },
+      { label: "3D Experience", href: "/journey" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Contact VAN", href: "/contact" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
     ],
   },
 ];
@@ -38,36 +39,40 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className="container">
-        <div className={styles.footerTop}>
-          <div className={styles.footerBrand}>
-            <Logo dark />
-            <p className={styles.footerTagline}>
-              The operating environment for modern farming.
-            </p>
-          </div>
-          <div className={styles.footerCols}>
-            {COLUMNS.map((col) => (
-              <div key={col.title}>
-                <h3 className={styles.footerColTitle}>{col.title}</h3>
-                <ul className={styles.footerLinks}>
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <Link href={link.href}>{link.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.footerBottom}>
-          <p>© {new Date().getFullYear()} VAN Technologies. All rights reserved.</p>
-          <p className={styles.footerLegal}>
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/terms">Terms</Link>
+      <div className={`container ${styles.footerInner}`}>
+        <div className={styles.footerBrand}>
+          <Logo />
+          <p className={styles.footerTagline}>
+            Helping farmers, from soil to sale.
+          </p>
+          <p className={styles.footerNote}>
+            VAN is building an integrated agricultural operating company.
+            All demonstration content is illustrative and for informational purposes only.
           </p>
         </div>
+
+        <div className={styles.footerLinks}>
+          {FOOTER_LINKS.map((group) => (
+            <div key={group.title} className={styles.footerColumn}>
+              <h4 className={styles.footerColumnTitle}>{group.title}</h4>
+              <ul className={styles.footerColumnLinks}>
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className={styles.footerLink}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={`container ${styles.footerBottom}`}>
+        <p className={styles.footerCopyright}>
+          &copy; {new Date().getFullYear()} VAN. All rights reserved.
+        </p>
       </div>
     </footer>
   );

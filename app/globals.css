@@ -182,6 +182,18 @@ h4 {
   padding-block: var(--space-9);
 }
 
+.section--dark {
+  background: linear-gradient(180deg, var(--color-forest-deep), var(--color-forest));
+  color: var(--text-on-dark);
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--text-on-dark);
+}
+
 @media (max-width: 720px) {
   .section {
     padding-block: var(--space-7);

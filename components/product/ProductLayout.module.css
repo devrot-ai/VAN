@@ -1,0 +1,276 @@
+/* ============================================================
+   VAN Product — Layout Styles
+   ============================================================ */
+
+/* ─── Sidebar ─── */
+
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: #173d32;
+  color: #eef2ec;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+}
+
+.sidebarHeader {
+  padding: 0 1.25rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.sidebarLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoMark {
+  width: 24px;
+  height: 24px;
+  background: #b7c9a8;
+  border-radius: 4px;
+  display: block;
+}
+
+.logoWord {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.productBadge {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b7c9a8;
+  background: rgba(183, 201, 168, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+}
+
+/* ─── Farm Selector ─── */
+
+.farmSelector {
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.farmName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.farmMeta {
+  font-size: 0.75rem;
+  color: #a9b69a;
+  margin-bottom: 0.5rem;
+}
+
+.fieldSelect {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: #eef2ec;
+  outline: none;
+  cursor: pointer;
+}
+
+.fieldSelect:focus {
+  border-color: #b7c9a8;
+}
+
+.fieldSelect option {
+  background: #173d32;
+  color: #eef2ec;
+}
+
+/* ─── Navigation ─── */
+
+.nav {
+  flex: 1;
+  padding: 0.75rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #a9b69a;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #eef2ec;
+}
+
+.navItemActive {
+  background: rgba(183, 201, 168, 0.15);
+  color: #eef2ec;
+  font-weight: 500;
+}
+
+.navIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.navLabel {
+  flex: 1;
+}
+
+.navChevron {
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+}
+
+/* ─── Footer ─── */
+
+.sidebarFooter {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0.5rem;
+}
+
+.journeyLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(196, 138, 71, 0.15);
+  color: #e9c79a;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+
+.journeyLink:hover {
+  background: rgba(196, 138, 71, 0.25);
+}
+
+.journeyIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Main Layout ─── */
+
+.productLayout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.productMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #f7f7f2;
+}
+
+.productTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e9e2;
+  min-height: 56px;
+}
+
+.topBarTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #202621;
+}
+
+.topBarActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.demoNotice {
+  font-size: 0.7rem;
+  color: #5f6a61;
+  background: #e5e9e2;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.productContent {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 768px) {
+  .productLayout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    padding: 0.5rem;
+  }
+
+  .navItem {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .navLabel {
+    display: none;
+  }
+
+  .productContent {
+    padding: 1rem;
+  }
+
+  .productTopBar {
+    padding: 0.75rem 1rem;
+  }
+}
