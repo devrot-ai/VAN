@@ -223,6 +223,42 @@ export type JourneyStage =
   | "harvest"
   | "finance";
 
+export type JourneyMode = "explore" | "journey";
+
+export type WorldCategory =
+  | "fields"
+  | "soil-assessment"
+  | "inputs"
+  | "machinery"
+  | "workshop"
+  | "operations"
+  | "irrigation"
+  | "harvest"
+  | "processing"
+  | "storage"
+  | "cold-storage"
+  | "logistics"
+  | "market"
+  | "sensors";
+
+export interface WorldLocation {
+  id: string;
+  name: string;
+  category: WorldCategory;
+  description: string;
+  whatVANDoes: string;
+  connections: string[];
+  cameraPosition: [number, number, number];
+  cameraLookAt: [number, number, number];
+  objects: string[]; // IDs of objects in this location
+}
+
+export interface JourneySubStep {
+  id: string;
+  name: string;
+  description: string;
+}
+
 export interface StageInfo {
   id: JourneyStage;
   index: string;
@@ -235,4 +271,41 @@ export interface StageInfo {
   nextStep: JourneyStage | null;
   cameraPosition: [number, number, number];
   cameraLookAt: [number, number, number];
+  subSteps: JourneySubStep[];
 }
+
+// Maps WorldLocation categories to JourneyStage for cross-mode navigation
+export const LOCATION_TO_STAGE: Record<string, JourneyStage> = {
+  "soil-assessment": "land-assessment",
+  "inputs": "inputs",
+  "machinery": "machinery",
+  "workshop": "machinery",
+  "operations": "operations",
+  "irrigation": "operations",
+  "harvest": "harvest",
+  "processing": "harvest",
+  "storage": "harvest",
+  "cold-storage": "harvest",
+  "logistics": "harvest",
+  "market": "finance",
+  "sensors": "land-assessment",
+  "fields": "operations",
+};
+
+// VAN business pillars for object info
+export type VANPillar =
+  | "land-intelligence"
+  | "agricultural-inputs"
+  | "machinery-infrastructure"
+  | "farm-operations"
+  | "harvest-processing-storage"
+  | "finance-commerce-market";
+
+export const PILLAR_NAMES: Record<VANPillar, string> = {
+  "land-intelligence": "Land Intelligence & Assessment",
+  "agricultural-inputs": "Agricultural Inputs & Procurement",
+  "machinery-infrastructure": "Machinery & Infrastructure",
+  "farm-operations": "Farm Operations & Crop Management",
+  "harvest-processing-storage": "Harvest, Processing, Storage & Logistics",
+  "finance-commerce-market": "Finance, Commerce & Market",
+};

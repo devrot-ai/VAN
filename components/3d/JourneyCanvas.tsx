@@ -1,12 +1,11 @@
 "use client";
 
-import { Suspense, useState, useCallback, useRef, useMemo } from "react";
+import { Suspense, useRef } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import { World } from "./world";
-import { journeyStages } from "@/lib/simulation/demoData";
-import type { JourneyStage } from "@/lib/simulation/types";
+import { useJourneyState } from "@/lib/simulation/JourneyState";
 import styles from "./JourneyCanvas.module.css";
 
 // ─── Camera Controller ───────────────────────────────────────────
@@ -91,36 +90,16 @@ function Loader() {
 
 // ─── Main Canvas ─────────────────────────────────────────────────
 
-export default function JourneyCanvas({
-  activeStage,
-  onSelectObject,
-}: {
-  activeStage: JourneyStage;
-  onSelectObject: (name: string, type: string) => void;
-}) {
-  const [animating, setAnimating] = useState(false);
-  const stageData = useMemo(
-    () => journeyStages.find((s) => s.id === activeStage),
-    [activeStage]
-  );
-
-  const targetPos = useMemo(
-    () => new THREE.Vector3(...(stageData?.cameraPosition ?? [30, 25, 30])),
-    [stageData?.cameraPosition]
-  );
-  const targetLook = useMemo(
-    () => new THREE.Vector3(...(stageData?.cameraLookAt ?? [0, 0, 0])),
-    [stageData?.cameraLookAt]
-  );
-
-  // Trigger camera animation when stage changes
-  const prevStage = useRef(activeStage);
-  if (prevStage.current !== activeStage) {
-    setAnimating(true);
-    prevStage.current = activeStage;
-    // Stop animating flag after transition
-    setTimeout(() => setAnimating(false), 2000);
-  }
+export default function JourneyCanvas() {
+  const {
+    mode,
+    activeStage,
+    selectObject,
+    visibleCategories,
+    cameraTarget,
+    cameraLookAt,
+    animating,
+  } = useJourneyState();
 
   return (
     <div className={styles.canvasContainer}>
@@ -130,7 +109,6 @@ export default function JourneyCanvas({
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: false }}
         onCreated={() => {
-          // Respect reduced motion
           const prefersReduced = window.matchMedia(
             "(prefers-reduced-motion: reduce)"
           ).matches;
@@ -166,13 +144,16 @@ export default function JourneyCanvas({
 
         {/* World */}
         <Suspense fallback={<Loader />}>
-          <World onSelectObject={onSelectObject} />
+          <World
+            onSelectObject={selectObject}
+            visibleCategories={visibleCategories}
+          />
         </Suspense>
 
         {/* Camera animation */}
         <CameraController
-          targetPosition={targetPos}
-          targetLookAt={targetLook}
+          targetPosition={cameraTarget}
+          targetLookAt={cameraLookAt}
           animating={animating}
         />
 

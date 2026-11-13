@@ -17,6 +17,8 @@ import type {
   Shipment,
   FinancialTransaction,
   StageInfo,
+  WorldLocation,
+  JourneySubStep,
 } from "./types";
 
 // ─── Farmer & Farm ───────────────────────────────────────────────
@@ -543,6 +545,12 @@ export const journeyStages: StageInfo[] = [
     nextStep: "inputs",
     cameraPosition: [30, 25, 30],
     cameraLookAt: [0, 0, 0],
+    subSteps: [
+      { id: "field-mapping", name: "Field Mapping", description: "Field boundaries are mapped using GPS and satellite imagery." },
+      { id: "soil-sampling", name: "Soil Sampling", description: "Soil samples are collected at key points across the field." },
+      { id: "lab-analysis", name: "Laboratory Analysis", description: "Samples are analyzed for pH, nutrients, organic carbon, and texture." },
+      { id: "assessment-report", name: "Assessment Report", description: "A Field Passport is generated with recommendations for crop suitability." },
+    ],
   },
   {
     id: "inputs",
@@ -560,6 +568,12 @@ export const journeyStages: StageInfo[] = [
     nextStep: "machinery",
     cameraPosition: [-30, 20, 30],
     cameraLookAt: [-35, 0, 0],
+    subSteps: [
+      { id: "input-selection", name: "Input Selection", description: "Seeds and fertilisers are selected based on soil assessment results." },
+      { id: "inventory-allocation", name: "Inventory Allocation", description: "Required inputs are allocated from VAN's warehouse inventory." },
+      { id: "order-preparation", name: "Order Preparation", description: "A supply order is prepared and staged for delivery." },
+      { id: "delivery-to-farm", name: "Delivery to Farm", description: "Inputs are transported from the supply centre to the farm." },
+    ],
   },
   {
     id: "machinery",
@@ -577,6 +591,12 @@ export const journeyStages: StageInfo[] = [
     nextStep: "operations",
     cameraPosition: [0, 20, 35],
     cameraLookAt: [0, 0, 10],
+    subSteps: [
+      { id: "equipment-selection", name: "Equipment Selection", description: "The right machinery is selected for the planned operation." },
+      { id: "operator-assignment", name: "Operator Assignment", description: "Trained operators are assigned to each machine." },
+      { id: "machinery-dispatch", name: "Machinery Dispatch", description: "Equipment leaves the yard and travels to the assigned field." },
+      { id: "land-preparation", name: "Land Preparation", description: "The field is prepared for planting with tillage and soil conditioning." },
+    ],
   },
   {
     id: "operations",
@@ -594,6 +614,15 @@ export const journeyStages: StageInfo[] = [
     nextStep: "harvest",
     cameraPosition: [20, 25, -10],
     cameraLookAt: [10, 0, -10],
+    subSteps: [
+      { id: "planting", name: "Planting", description: "Seeds are planted at the correct depth and spacing." },
+      { id: "crop-emergence", name: "Crop Emergence", description: "Seedlings emerge and begin establishing root systems." },
+      { id: "irrigation", name: "Irrigation", description: "Water is delivered through drip or sprinkler systems." },
+      { id: "fertilisation", name: "Fertilisation", description: "Nutrients are applied based on soil assessment and crop stage." },
+      { id: "crop-monitoring", name: "Crop Monitoring", description: "Sensors and field inspections track crop health and growth." },
+      { id: "field-inspection", name: "Field Inspection", description: "Workers inspect fields for pests, disease, and nutrient deficiencies." },
+      { id: "crop-maturity", name: "Crop Maturity", description: "Crops reach full maturity and are ready for harvest." },
+    ],
   },
   {
     id: "harvest",
@@ -611,6 +640,16 @@ export const journeyStages: StageInfo[] = [
     nextStep: "finance",
     cameraPosition: [-20, 25, -20],
     cameraLookAt: [-25, 0, -20],
+    subSteps: [
+      { id: "harvest-initiation", name: "Harvest Initiation", description: "Combine harvesters are deployed to the mature field." },
+      { id: "cutting", name: "Cutting", description: "Crops are cut and separated from stalks." },
+      { id: "collection", name: "Collection", description: "Harvested produce is collected into transport vehicles." },
+      { id: "loading", name: "Loading", description: "Produce is loaded for transport to processing." },
+      { id: "weighing", name: "Weighing", description: "Harvest quantity is weighed and recorded." },
+      { id: "sorting-grading", name: "Sorting & Grading", description: "Produce is sorted by quality and grade." },
+      { id: "processing", name: "Processing", description: "Produce enters the processing facility for cleaning and packaging." },
+      { id: "storage", name: "Storage", description: "Processed goods enter silos and warehouses." },
+    ],
   },
   {
     id: "finance",
@@ -628,5 +667,174 @@ export const journeyStages: StageInfo[] = [
     nextStep: null,
     cameraPosition: [0, 30, -35],
     cameraLookAt: [0, 0, -30],
+    subSteps: [
+      { id: "shipment-preparation", name: "Shipment Preparation", description: "Stored produce is prepared for dispatch to buyers." },
+      { id: "vehicle-dispatch", name: "Vehicle Dispatch", description: "A transport vehicle is assigned and loaded." },
+      { id: "transportation", name: "Transportation", description: "The truck travels from storage to the market destination." },
+      { id: "delivery", name: "Delivery", description: "Produce arrives at the buyer's facility." },
+      { id: "buyer-acceptance", name: "Buyer Acceptance", description: "The buyer inspects and accepts the delivery." },
+      { id: "financial-settlement", name: "Financial Settlement", description: "Payment is processed and the farmer's account is updated." },
+    ],
+  },
+];
+
+// ─── World Locations (Explore Mode) ──────────────────────────────
+
+export const worldLocations: WorldLocation[] = [
+  {
+    id: "loc-assessment",
+    name: "Land Assessment Zone",
+    category: "soil-assessment",
+    description:
+      "The starting point of every agricultural cycle. Fields are mapped, soil samples are collected, and laboratory analysis determines nutrient levels, pH, texture, and crop suitability.",
+    whatVANDoes:
+      "VAN conducts soil sampling, laboratory testing, field mapping, and provides agronomic interpretation through the Field Passport system.",
+    connections: ["loc-inputs", "loc-operations"],
+    cameraPosition: [15, 15, 15],
+    cameraLookAt: [0, 0, 0],
+    objects: ["eq-weather-01"],
+  },
+  {
+    id: "loc-inputs",
+    name: "Agricultural Supply Centre",
+    category: "inputs",
+    description:
+      "VAN's input supply facility stores and distributes seeds, fertilisers, crop protection products, and irrigation components. Inventory is managed centrally and delivered to fields as needed.",
+    whatVANDoes:
+      "VAN procures, stocks, and distributes agricultural inputs, ensuring quality and availability for all connected operations.",
+    connections: ["loc-assessment", "loc-machinery", "loc-operations"],
+    cameraPosition: [-25, 15, 20],
+    cameraLookAt: [-35, 0, 0],
+    objects: ["warehouse-seed", "eq-005"],
+  },
+  {
+    id: "loc-machinery",
+    name: "Machinery Yard",
+    category: "machinery",
+    description:
+      "The operational heart of VAN's equipment fleet. Tractors, combines, sprayers, and implements are stored, maintained, and deployed from this yard.",
+    whatVANDoes:
+      "VAN owns, leases, and operates machinery, deploying equipment where needed with trained operators and scheduled maintenance.",
+    connections: ["loc-inputs", "loc-workshop", "loc-operations"],
+    cameraPosition: [5, 15, 25],
+    cameraLookAt: [0, 0, 12],
+    objects: ["eq-001", "eq-003", "eq-004"],
+  },
+  {
+    id: "loc-workshop",
+    name: "Equipment Maintenance Workshop",
+    category: "workshop",
+    description:
+      "VAN's maintenance facility ensures all machinery remains operational. Scheduled servicing, repairs, and inspections keep the fleet reliable.",
+    whatVANDoes:
+      "VAN operates a maintenance workshop with trained technicians, ensuring equipment availability and reducing downtime.",
+    connections: ["loc-machinery"],
+    cameraPosition: [10, 12, 22],
+    cameraLookAt: [5, 0, 14],
+    objects: ["workshop-01"],
+  },
+  {
+    id: "loc-operations",
+    name: "Agricultural Fields",
+    category: "operations",
+    description:
+      "The growing area where crops are cultivated through the full lifecycle. Fields are monitored continuously with sensors, weather data, and field inspections.",
+    whatVANDoes:
+      "VAN coordinates all field operations including planting, irrigation, fertilisation, crop protection, and monitoring.",
+    connections: ["loc-assessment", "loc-machinery", "loc-harvest"],
+    cameraPosition: [20, 20, 0],
+    cameraLookAt: [10, 0, -10],
+    objects: [],
+  },
+  {
+    id: "loc-irrigation",
+    name: "Irrigation Infrastructure",
+    category: "irrigation",
+    description:
+      "Water management systems including pumps, channels, and drip irrigation networks ensure crops receive adequate water throughout the growing season.",
+    whatVANDoes:
+      "VAN installs and manages irrigation infrastructure, monitoring water usage and scheduling irrigation based on crop needs and weather data.",
+    connections: ["loc-operations"],
+    cameraPosition: [22, 12, -8],
+    cameraLookAt: [14, 0, -14],
+    objects: [],
+  },
+  {
+    id: "loc-harvest",
+    name: "Harvesting Zone",
+    category: "harvest",
+    description:
+      "When crops reach maturity, combines and harvest crews are deployed. Harvested produce is collected, weighed, and moved to processing and storage.",
+    whatVANDoes:
+      "VAN deploys harvesting equipment and crews, manages the harvest operation, and coordinates the movement of produce to processing.",
+    connections: ["loc-operations", "loc-processing", "loc-storage"],
+    cameraPosition: [-15, 20, -5],
+    cameraLookAt: [-22, 0, -16],
+    objects: ["eq-002"],
+  },
+  {
+    id: "loc-processing",
+    name: "Processing Facility",
+    category: "processing",
+    description:
+      "Harvested produce enters the processing facility for sorting, grading, cleaning, and packaging. Quality control ensures produce meets market standards.",
+    whatVANDoes:
+      "VAN operates processing facilities that sort, grade, and package agricultural produce for market delivery.",
+    connections: ["loc-harvest", "loc-storage"],
+    cameraPosition: [-25, 15, -15],
+    cameraLookAt: [-30, 0, -22],
+    objects: ["facility-01"],
+  },
+  {
+    id: "loc-storage",
+    name: "Grain Storage",
+    category: "storage",
+    description:
+      "Grain silos provide secure, climate-controlled storage for harvested produce. Inventory is tracked and managed until dispatch to market.",
+    whatVANDoes:
+      "VAN operates grain silos and warehouses, maintaining quality and tracking inventory levels for efficient dispatch.",
+    connections: ["loc-processing", "loc-cold-storage", "loc-logistics"],
+    cameraPosition: [-20, 15, -18],
+    cameraLookAt: [-25, 0, -26],
+    objects: ["storage-001", "storage-002"],
+  },
+  {
+    id: "loc-cold-storage",
+    name: "Cold Storage Facility",
+    category: "cold-storage",
+    description:
+      "Temperature-controlled storage for perishable agricultural products. Maintains quality and extends shelf life for fresh produce.",
+    whatVANDoes:
+      "VAN operates cold storage facilities for temperature-sensitive produce, ensuring quality from harvest to market.",
+    connections: ["loc-storage", "loc-logistics"],
+    cameraPosition: [-30, 12, -12],
+    cameraLookAt: [-34, 0, -18],
+    objects: ["storage-003"],
+  },
+  {
+    id: "loc-logistics",
+    name: "Logistics Hub",
+    category: "logistics",
+    description:
+      "The transport and dispatch centre where loaded trucks depart for distribution centres and markets. Shipment tracking ensures timely delivery.",
+    whatVANDoes:
+      "VAN manages transport logistics, vehicle dispatch, and shipment tracking from storage to final destination.",
+    connections: ["loc-storage", "loc-market"],
+    cameraPosition: [-10, 15, -18],
+    cameraLookAt: [-15, 0, -22],
+    objects: [],
+  },
+  {
+    id: "loc-market",
+    name: "Distribution & Market Centre",
+    category: "market",
+    description:
+      "The final destination where produce is delivered to buyers. Commercial transactions are recorded, payments processed, and financial settlement completed.",
+    whatVANDoes:
+      "VAN connects harvested produce with buyers, manages commercial transactions, and provides financial settlement and profitability analysis.",
+    connections: ["loc-logistics"],
+    cameraPosition: [5, 20, -20],
+    cameraLookAt: [0, 0, -30],
+    objects: ["market-01"],
   },
 ];
