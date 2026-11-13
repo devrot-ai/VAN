@@ -1,0 +1,560 @@
+/* Hero — cream, ruled, with a drawn field figure */
+.hero {
+  padding-block: var(--space-9) var(--space-10);
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--line);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: var(--space-9);
+  align-items: center;
+}
+
+.heroCopy {
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+}
+
+.heroTitle {
+  font-size: clamp(2.7rem, 5.6vw, 4.6rem);
+  letter-spacing: -0.015em;
+  max-width: 13ch;
+  line-height: 1.04;
+}
+
+.heroAccent {
+  color: var(--color-green);
+  font-weight: 340;
+}
+
+.heroLead {
+  font-size: var(--text-lg);
+  max-width: 46ch;
+  color: var(--text-strong);
+}
+
+.heroCta {
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: var(--space-1);
+}
+
+.heroLink {
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--color-green);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.heroLink:hover {
+  color: var(--color-forest);
+  text-decoration-thickness: 2px;
+}
+
+.heroFoot {
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Figure — drawn field plan */
+.figure {
+  justify-self: end;
+  width: 100%;
+  max-width: 440px;
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.planSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+}
+
+.figureCaption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+}
+
+.figureIndex {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--color-forest);
+  white-space: nowrap;
+}
+
+/* Problem — ruled index columns */
+.painGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-7);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+
+.painItem {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.painIndex {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-green);
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--space-3);
+}
+
+.painTitle {
+  font-size: 1.25rem;
+}
+
+/* Pillars register */
+.sectionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.sectionBarNote {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.pillarTitle {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-weight: 340;
+  letter-spacing: -0.01em;
+}
+
+.pillarLead {
+  color: var(--text-muted);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-8);
+  max-width: 52ch;
+}
+
+/* Connect field — dark grid diagram */
+.connectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: var(--space-8);
+  border: 1px solid rgba(238, 242, 236, 0.16);
+  background: rgba(238, 242, 236, 0.16);
+}
+
+.connectCell {
+  background: var(--color-forest);
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  min-height: 148px;
+}
+
+.connectIndex {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--color-field);
+  font-variant-numeric: tabular-nums;
+}
+
+.connectName {
+  font-size: var(--text-base);
+  color: var(--text-on-dark);
+}
+
+.connectNext {
+  margin-top: auto;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(183, 201, 168, 0.85);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Season models — five draggable dioramas */
+.modelGrid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.modelItem {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.modelHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--space-2);
+}
+
+.modelPhase {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-forest);
+}
+
+.modelSeason {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.modelText {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.modelPillars {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-harvest-ink);
+}
+
+@media (max-width: 1020px) {
+  .modelGrid {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: var(--space-3);
+    scroll-snap-type: x proximity;
+  }
+
+  .modelItem {
+    flex: 0 0 248px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Pipeline model — one wide working diagram, followed by its register. */
+.pipelineWrap {
+  margin-top: var(--space-8);
+  padding-block: var(--space-5);
+  border-block: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(40, 92, 73, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40, 92, 73, 0.045) 1px, transparent 1px),
+    var(--surface-raise);
+  background-size: 2.75rem 2.75rem;
+}
+
+.pipelineFig {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.legendGrid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.legendItem {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-4);
+}
+
+.legendHead {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.6rem;
+}
+
+.legendIndex {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-green);
+  font-variant-numeric: tabular-nums;
+}
+
+.legendPhase {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--color-forest);
+}
+
+.legendSeason {
+  margin-left: auto;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.legendText {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.legendPillars {
+  margin-top: var(--space-1);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: var(--color-harvest-ink);
+}
+
+@media (max-width: 1020px) {
+  .legendGrid {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-5);
+    padding-bottom: var(--space-3);
+    scroll-snap-type: x proximity;
+  }
+
+  .legendItem {
+    flex: 0 0 230px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Audience — ruled columns */
+.audienceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-7);
+}
+
+.audienceItem {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-5);
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.audienceIndex {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-harvest-ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.audienceTitle {
+  font-size: 1.35rem;
+}
+
+.audienceLinks {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.textLink {
+  font-weight: 600;
+  color: var(--color-green);
+  font-size: var(--text-sm);
+}
+
+.textLink:hover {
+  text-decoration: underline;
+}
+
+/* Hardware */
+.hardwareWrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+}
+
+.hardwareList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.hardwareItem {
+  border-top: 1px solid rgba(183, 201, 168, 0.4);
+  padding-top: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.hardwareIndex {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--color-field);
+}
+
+.hardwareTitle {
+  font-size: 1.12rem;
+}
+
+.hardwareText {
+  color: rgba(238, 242, 236, 0.78);
+  font-size: 0.95rem;
+}
+
+/* Global */
+.globalText {
+  text-align: center;
+  margin-top: var(--space-6);
+  font-size: var(--text-lg);
+  max-width: 62ch;
+  margin-inline: auto;
+}
+
+/* Early access */
+.earlyWrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-9);
+  align-items: start;
+}
+
+.earlyCopy {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.earlyTitle {
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+}
+
+.earlyPoints {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.earlyPoints li {
+  padding-left: 1.4rem;
+  position: relative;
+  font-size: var(--text-sm);
+  color: var(--text-strong);
+}
+
+.earlyPoints li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-harvest-ink);
+}
+
+.earlyForm {
+  background: var(--surface-raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.earlyFormBar {
+  background: var(--color-forest);
+  color: var(--text-on-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.7rem var(--space-5);
+}
+
+.earlyFormBody {
+  padding: var(--space-6) var(--space-5);
+}
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+
+  .figure {
+    justify-self: start;
+    max-width: 520px;
+  }
+
+  .painGrid,
+  .audienceGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .connectGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hardwareList {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .earlyWrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .painGrid,
+  .audienceGrid,
+  .hardwareList {
+    grid-template-columns: 1fr;
+  }
+
+  .connectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-block: var(--space-7);
+  }
+}

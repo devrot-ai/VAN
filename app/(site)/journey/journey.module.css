@@ -1,0 +1,463 @@
+.journeyPage {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5);
+}
+
+/* ─── Header ─── */
+
+.journeyHeader {
+  text-align: center;
+  margin-bottom: var(--space-7);
+}
+
+.journeyTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 400;
+  color: var(--color-forest);
+  margin: var(--space-2) 0;
+  line-height: 1.15;
+}
+
+.journeyLead {
+  font-size: var(--text-lg);
+  color: var(--color-muted);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ─── Stage Timeline ─── */
+
+.stageTimeline {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.stageBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--surface-raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.stageBtn:hover {
+  border-color: var(--color-green);
+  color: var(--color-forest);
+}
+
+.stageBtnActive {
+  background: var(--color-forest);
+  border-color: var(--color-forest);
+  color: var(--text-on-dark);
+}
+
+.stageIndex {
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.stageName {
+  font-weight: 600;
+}
+
+/* ─── Content Layout ─── */
+
+.journeyContent {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.canvasArea {
+  position: relative;
+}
+
+.loading3d {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  background: #d8d4c8;
+  border-radius: var(--radius);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* ─── Journey Controls ─── */
+
+.journeyControls {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.ctrlBtn {
+  padding: 10px 20px;
+  background: var(--color-forest);
+  color: var(--text-on-dark);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ctrlBtn:hover {
+  background: var(--color-green);
+}
+
+.ctrlBtnSmall {
+  padding: 10px 16px;
+  background: var(--surface-raise);
+  color: var(--color-forest);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ctrlBtnSmall:hover {
+  border-color: var(--color-green);
+}
+
+/* ─── Info Panel ─── */
+
+.infoPanel {
+  background: var(--surface-raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.infoPanelHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.infoPanelIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--color-forest);
+  color: var(--text-on-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.infoPanelTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--color-forest);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.infoPanelDesc {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.infoPanelSections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.infoPanelBlock h4 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin: 0 0 4px;
+}
+
+.infoPanelBlock p {
+  font-size: var(--text-sm);
+  color: var(--text-strong);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── Detail Cards ─── */
+
+.detailSection {
+  margin-top: var(--space-4);
+}
+
+.detailSection h4 {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-forest);
+  margin: 0 0 var(--space-2);
+}
+
+.demoNote {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-harvest);
+  margin: 0 0 var(--space-3);
+}
+
+.detailCard {
+  padding: var(--space-3);
+  background: var(--surface-page);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+}
+
+.detailCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.detailGrid strong {
+  color: var(--text-strong);
+}
+
+.badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  background: var(--color-green);
+  color: var(--text-on-dark);
+  border-radius: 2px;
+}
+
+.badgeStock {
+  background: var(--color-harvest);
+}
+
+.suitability {
+  font-size: 0.75rem;
+  color: var(--color-green);
+  margin-top: 4px;
+}
+
+.evidence {
+  font-size: 0.65rem;
+  color: var(--color-muted);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* ─── Finance Summary ─── */
+
+.financeSummary {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--space-3);
+}
+
+.financeRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.financeRow:last-child {
+  border-bottom: none;
+}
+
+.financeTotal {
+  background: var(--surface-page);
+  color: var(--color-green);
+}
+
+.financeNet {
+  background: var(--color-forest);
+  color: var(--text-on-dark);
+  font-size: 0.9rem;
+}
+
+/* ─── Next Stage Button ─── */
+
+.nextStageBtn {
+  width: 100%;
+  margin-top: var(--space-4);
+  padding: 12px;
+  background: var(--color-forest);
+  color: var(--text-on-dark);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nextStageBtn:hover {
+  background: var(--color-green);
+}
+
+/* ─── Object Info Panel ─── */
+
+.objectInfo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 340px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--surface-raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  font-size: 0.85rem;
+}
+
+.objectInfoHeader {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.objectInfoHeader strong {
+  font-size: 0.95rem;
+  color: var(--color-forest);
+}
+
+.objectType {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  background: var(--surface-page);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.objectData {
+  padding: 16px 20px;
+}
+
+.closeBtn {
+  width: 100%;
+  padding: 10px;
+  background: var(--surface-page);
+  border: none;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--line);
+  color: var(--color-forest);
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 1024px) {
+  .journeyContent {
+    grid-template-columns: 1fr;
+  }
+
+  .infoPanel {
+    position: static;
+    max-height: none;
+  }
+  
+  .objectInfo {
+    width: calc(100% - 40px);
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 768px) {
+  .journeyPage {
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .journeyTitle {
+    font-size: var(--text-3xl);
+  }
+
+  .stageTimeline {
+    gap: 4px;
+  }
+
+  .stageBtn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .stageName {
+    display: none;
+  }
+
+  .infoPanel {
+    padding: var(--space-4);
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .objectInfo {
+    width: calc(100% - 24px);
+    right: 12px;
+    bottom: 12px;
+  }
+}

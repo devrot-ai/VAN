@@ -1,0 +1,24 @@
+.hero {
+  padding-block: var(--space-8) var(--space-9);
+}
+
+.dark {
+  background: linear-gradient(180deg, var(--color-forest-deep), var(--color-forest));
+}
+
+.title {
+  font-size: clamp(2.3rem, 5.5vw, 3.9rem);
+  margin-top: var(--space-4);
+  max-width: 20ch;
+}
+
+.lead {
+  margin-top: var(--space-5);
+  font-size: var(--text-xl);
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+.leadDark {
+  color: rgba(238, 242, 236, 0.82);
+}

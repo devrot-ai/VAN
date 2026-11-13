@@ -1,0 +1,260 @@
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247, 247, 242, 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.headerDark {
+  background: rgba(15, 43, 35, 0.82);
+  border-color: rgba(238, 242, 236, 0.12);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.logoMark {
+  display: inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 1px;
+  flex-shrink: 0;
+  background: var(--color-forest);
+}
+
+.logoMarkDark {
+  background: var(--color-warm-white);
+}
+
+.logoWord {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  color: var(--color-forest);
+}
+
+.logoWordDark {
+  color: #fff;
+}
+
+.burger {
+  display: none;
+  margin-left: auto;
+  background: none;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 2px;
+}
+
+.burger span {
+  width: 20px;
+  height: 2px;
+  background: var(--color-charcoal);
+  border-radius: 2px;
+}
+
+.headerDark .burger span {
+  background: #fff;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.navLink {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--text-strong);
+  padding: 0.55rem 0.75rem;
+  border-radius: 2px;
+}
+
+.navLink:hover {
+  color: var(--color-green);
+  background: rgba(40, 92, 73, 0.06);
+}
+
+.headerDark .navLink {
+  color: var(--text-on-dark);
+}
+
+.headerDark .navLink:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.navCta {
+  display: flex;
+  gap: var(--space-2);
+  margin-left: var(--space-2);
+}
+
+/* Header row — flex line inside the sticky bar (mobile nav offsets from it) */
+.headerInner {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+}
+
+/* Footer */
+.footer {
+  background: var(--color-forest-deep);
+  color: var(--text-on-dark);
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: var(--space-8);
+  padding-bottom: var(--space-7);
+  border-bottom: 1px solid rgba(238, 242, 236, 0.14);
+}
+
+.footerBrand {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.footerTagline {
+  color: rgba(238, 242, 236, 0.72);
+  max-width: 260px;
+}
+
+.footerCols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.footerColTitle {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(238, 242, 236, 0.6);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+
+.footerLinks {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.footerLinks a {
+  color: var(--text-on-dark);
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.footerLinks a:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: var(--space-6);
+  color: rgba(238, 242, 236, 0.6);
+  font-size: 0.875rem;
+}
+
+.footerLegal {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.footerLegal a:hover {
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav {
+    position: fixed;
+    inset: 0;
+    top: 64px;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--color-warm-white);
+    padding: var(--space-6);
+    gap: var(--space-3);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+    z-index: 60;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .headerDark .nav {
+    background: var(--color-forest-deep);
+  }
+
+  .navOpen {
+    transform: translateX(0);
+  }
+
+  .navLink {
+    font-size: 1rem;
+    padding: 0.6rem 0;
+    width: 100%;
+  }
+
+  .navCta {
+    margin-left: 0;
+    margin-top: var(--space-4);
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navCta > * {
+    width: 100%;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .footerTop {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .footerCols {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .footerCols {
+    grid-template-columns: 1fr;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

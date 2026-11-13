@@ -1,0 +1,81 @@
+.list {
+  display: grid;
+  border-bottom: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 4.5rem 15rem 1fr 2.5rem;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: 1.35rem var(--space-4);
+  border-top: 1px solid var(--line);
+  color: var(--text-strong);
+  transition: background-color 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.row:hover {
+  background: var(--color-forest);
+  border-color: var(--color-forest);
+}
+
+.index {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--color-forest);
+  letter-spacing: -0.005em;
+}
+
+.desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 44ch;
+}
+
+.arrow {
+  justify-self: end;
+  font-size: 1.2rem;
+  color: var(--color-green);
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+/* Inverted (hover) state */
+.row:hover .name {
+  color: var(--text-on-dark);
+  font-weight: 340;
+  font-style: italic;
+}
+
+.row:hover .index {
+  color: var(--color-field);
+}
+
+.row:hover .desc {
+  color: rgba(238, 242, 236, 0.75);
+}
+
+.row:hover .arrow {
+  color: var(--color-harvest-soft);
+  transform: translateX(4px);
+}
+
+@media (max-width: 860px) {
+  .row {
+    grid-template-columns: 3.5rem 1fr 2.5rem;
+    row-gap: var(--space-2);
+  }
+
+  .desc {
+    grid-column: 2 / -1;
+  }
+}

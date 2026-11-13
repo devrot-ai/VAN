@@ -1,0 +1,72 @@
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.featureCard {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+}
+
+.checklist {
+  list-style: none;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.checkitem {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: 1.05rem;
+}
+
+.checkmark {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-green);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  margin-top: 0.1em;
+}
+
+.ctaTitle {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  margin-bottom: var(--space-3);
+}
+
+.ctaText {
+  color: rgba(238, 242, 236, 0.8);
+  font-size: var(--text-lg);
+  max-width: 48ch;
+  margin: 0 auto var(--space-6);
+}
+
+.ctaButtons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .featureGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+}
