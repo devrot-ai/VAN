@@ -48,10 +48,11 @@ export interface AppConfig {
 
 /* ---------- Validation ---------- */
 
-function requiredEnv(key: string): string {
+function requiredEnv(key: string, fallback?: string): string {
   const val = process.env[key]
-  if (!val) throw new Error(`Missing required env var: ${key}`)
-  return val
+  if (val) return val
+  if (fallback !== undefined) return fallback
+  throw new Error(`Missing required env var: ${key}`)
 }
 
 function optionalEnv(key: string): string | null {
@@ -92,7 +93,7 @@ export function initConfig(overrides: Partial<AppConfig> = {}): AppConfig {
     dbPath: process.env.DB_PATH ?? "./data/van.db",
 
     // Auth
-    sessionSecret: requiredEnv("SESSION_SECRET"),
+    sessionSecret: requiredEnv("SESSION_SECRET", "van-dev-secret-change-me"),
     sessionMaxAge: envNum("SESSION_MAX_AGE", 7 * 24 * 60 * 60 * 1000), // 7 days
     rateLimitWindowMs: envNum("RATE_LIMIT_WINDOW_MS", 15 * 60 * 1000), // 15 min
     rateLimitMax: envNum("RATE_LIMIT_MAX", 100),

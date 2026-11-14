@@ -30,7 +30,7 @@ export default async function PillarPage({ params }: { params: Promise<{ pillar:
             {PILLARS.map((p) => (
               <Link
                 key={p.slug}
-                href={`/platform/${p.slug}`}
+                href={`/product`}
                 className={p.slug === pillar.slug ? styles.switcherActive : ""}
               >
                 {p.short}
@@ -128,7 +128,7 @@ export default async function PillarPage({ params }: { params: Promise<{ pillar:
             align="center"
           />
           <div className={styles.connectCta}>
-            <Button href="/platform" variant="onDark">See all six pillars</Button>
+            <Button href="/product" variant="onDark">Explore the product</Button>
           </div>
         </div>
       </Section>

@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { JourneyStateProvider, useJourneyState } from "@/lib/simulation/JourneyState";
 import { LOCATION_TO_STAGE } from "@/lib/simulation/types";
 import { journeyStages, worldLocations } from "@/lib/simulation/demoData";
@@ -54,9 +55,26 @@ export default function JourneyPage() {
 }
 
 function JourneyPageInner() {
+  const router = useRouter();
   const state = useJourneyState();
   const currentStage = journeyStages[state.stageIndex];
   const currentSubStep = currentStage.subSteps?.find((s) => s.id === state.activeSubStep);
+
+  // Map journey stages to Product modules
+  const stageToModule: Record<string, string> = {
+    "land-assessment": "land-intelligence",
+    "inputs": "inputs",
+    "machinery": "machinery",
+    "operations": "operations",
+    "harvest": "harvest",
+    "finance": "finance",
+  };
+
+  // Navigate to the Product dashboard for the current stage
+  const goToProduct = (module?: string) => {
+    const m = module || stageToModule[state.activeStage] || "overview";
+    router.push(`/product?module=${m}`);
+  };
 
   // Look up simulation data for selected object
   const selectedObjectData = state.selectedObject?.data ? (() => {
@@ -493,6 +511,12 @@ function JourneyPageInner() {
             >
               🌍 Explore this infrastructure
             </button>
+            <button
+              className={styles.crossModeBtn}
+              onClick={() => goToProduct()}
+            >
+              📊 View in Product dashboard
+            </button>
 
             {currentStage.nextStep && (
               <button
@@ -559,14 +583,25 @@ function JourneyPageInner() {
                 {/* Cross-mode: Experience in journey */}
                 {(() => {
                   const stage = LOCATION_TO_STAGE[state.selectedLocation!.category];
-                  return stage ? (
-                    <button
-                      className={styles.crossModeBtn}
-                      onClick={() => state.navigateToStageFromExplore(stage as JourneyStage)}
-                    >
-                      🔄 Experience in journey
-                    </button>
-                  ) : null;
+                  const module = stage ? (stageToModule[stage] || "overview") : "overview";
+                  return (
+                    <>
+                      {stage ? (
+                        <button
+                          className={styles.crossModeBtn}
+                          onClick={() => state.navigateToStageFromExplore(stage)}
+                        >
+                          🔄 Experience in journey
+                        </button>
+                      ) : null}
+                      <button
+                        className={styles.crossModeBtn}
+                        onClick={() => goToProduct(module)}
+                      >
+                        📊 View in Product dashboard
+                      </button>
+                    </>
+                  );
                 })()}
               </div>
             )}
@@ -758,6 +793,20 @@ function JourneyPageInner() {
               <p>{state.selectedObject.name} — {state.selectedObject.type}</p>
               <p className={styles.demoNote}>Part of the VAN agricultural operation</p>
             </div>
+          )}
+          {/* View in Product link for known object types */}
+          {selectedObjectData && (
+            <button
+              className={styles.crossModeBtn}
+              onClick={() => {
+                if (selectedObjectData.type === "equipment") goToProduct("machinery");
+                else if (selectedObjectData.type === "storage") goToProduct("harvest");
+                else if (selectedObjectData.type === "shipment") goToProduct("logistics");
+                else goToProduct();
+              }}
+            >
+              📊 View in Product dashboard
+            </button>
           )}
           <button className={styles.closeBtn} onClick={state.clearSelection}>✕ Close</button>
         </div>
