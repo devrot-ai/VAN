@@ -175,16 +175,48 @@ export function Tractor({
 /**
  * Combine Harvester — detailed harvesting machine with header, cabin,
  * grain tank, auger, wheels, and exhaust
+ * Includes animations: header reel rotation, wheel rotation, auger movement
  */
 export function CombineHarvester({
   position,
   rotation = [0, 0, 0],
   scale = 1,
+  animate = false,
 }: {
   position: [number, number, number];
   rotation?: [number, number, number];
   scale?: number;
+  animate?: boolean;
 }) {
+  const reelRef = useRef<THREE.Group>(null);
+  const wheelRef = useRef<THREE.Group>(null);
+  const augerRef = useRef<THREE.Group>(null);
+
+  useFrame((_state, delta) => {
+    if (animate) {
+      // Header reel rotation
+      if (reelRef.current) {
+        reelRef.current.rotation.x += delta * 3;
+      }
+      // Wheel rotation
+      if (wheelRef.current) {
+        wheelRef.current.children.forEach((child) => {
+          if (child instanceof THREE.Group) {
+            child.children.forEach((mesh) => {
+              if (mesh instanceof THREE.Mesh) {
+                mesh.rotation.x += delta * 1.5;
+              }
+            });
+          }
+        });
+      }
+      // Auger subtle vibration
+      if (augerRef.current) {
+        augerRef.current.position.y = 2.6 * scale + Math.sin(Date.now() * 0.005) * 0.02 * scale;
+      }
+    }
+  });
+
   return (
     <group position={position} rotation={rotation}>
       {/* ── Main body / chassis ── */}
@@ -219,18 +251,20 @@ export function CombineHarvester({
         <boxGeometry args={[1.8 * scale, 0.25 * scale, 3.5 * scale]} />
         <meshStandardMaterial color="#c48a47" roughness={0.6} metalness={0.2} />
       </mesh>
-      {/* Header reel */}
-      <mesh position={[3.1 * scale, 0.8 * scale, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
-        <cylinderGeometry args={[0.05 * scale, 0.05 * scale, 3.5 * scale, 8]} />
-        <meshStandardMaterial color="#5a5a5a" metalness={0.5} />
-      </mesh>
-      {/* Reel tines */}
-      {[-1.5, -0.75, 0, 0.75, 1.5].map((z, i) => (
-        <mesh key={`tine-${i}`} position={[3.1 * scale, 1.2 * scale, z * scale]}>
-          <boxGeometry args={[0.3 * scale, 0.03 * scale, 0.03 * scale]} />
+      {/* Header reel (animated) */}
+      <group ref={reelRef} position={[3.1 * scale, 0.8 * scale, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+        <mesh>
+          <cylinderGeometry args={[0.05 * scale, 0.05 * scale, 3.5 * scale, 8]} />
           <meshStandardMaterial color="#5a5a5a" metalness={0.5} />
         </mesh>
-      ))}
+        {/* Reel tines */}
+        {[-1.5, -0.75, 0, 0.75, 1.5].map((z, i) => (
+          <mesh key={`tine-${i}`} position={[0, 0.4 * scale, z * scale]}>
+            <boxGeometry args={[0.3 * scale, 0.03 * scale, 0.03 * scale]} />
+            <meshStandardMaterial color="#5a5a5a" metalness={0.5} />
+          </mesh>
+        ))}
+      </group>
 
       {/* ── Grain tank (top) ── */}
       <mesh position={[-0.8 * scale, 1.7 * scale, 0]} castShadow>
@@ -243,16 +277,18 @@ export function CombineHarvester({
         <meshStandardMaterial color="#b0a898" roughness={0.6} />
       </mesh>
 
-      {/* ── Auger / unloading pipe ── */}
-      <mesh position={[-0.8 * scale, 2.6 * scale, 1.3 * scale]} rotation={[0, 0, 0.15]} castShadow>
-        <cylinderGeometry args={[0.12 * scale, 0.12 * scale, 2.5 * scale, 8]} />
-        <meshStandardMaterial color="#6a6050" metalness={0.5} roughness={0.4} />
-      </mesh>
-      {/* Auger end */}
-      <mesh position={[-0.8 * scale, 2.6 * scale, 2.5 * scale]} castShadow>
-        <cylinderGeometry args={[0.15 * scale, 0.12 * scale, 0.3 * scale, 8]} />
-        <meshStandardMaterial color="#5a5040" metalness={0.4} />
-      </mesh>
+      {/* ── Auger / unloading pipe (animated) ── */}
+      <group ref={augerRef}>
+        <mesh position={[-0.8 * scale, 2.6 * scale, 1.3 * scale]} rotation={[0, 0, 0.15]} castShadow>
+          <cylinderGeometry args={[0.12 * scale, 0.12 * scale, 2.5 * scale, 8]} />
+          <meshStandardMaterial color="#6a6050" metalness={0.5} roughness={0.4} />
+        </mesh>
+        {/* Auger end */}
+        <mesh position={[-0.8 * scale, 2.6 * scale, 2.5 * scale]} castShadow>
+          <cylinderGeometry args={[0.15 * scale, 0.12 * scale, 0.3 * scale, 8]} />
+          <meshStandardMaterial color="#5a5040" metalness={0.4} />
+        </mesh>
+      </group>
 
       {/* ── Exhaust stack ── */}
       <mesh position={[1.3 * scale, 1.9 * scale, 0]} castShadow>
@@ -260,25 +296,27 @@ export function CombineHarvester({
         <meshStandardMaterial color="#5a5a5a" metalness={0.6} roughness={0.3} />
       </mesh>
 
-      {/* ── Wheels ── */}
-      {[
-        [1.3, 0.45, 1.2],
-        [1.3, 0.45, -1.2],
-        [-1.3, 0.45, 1.2],
-        [-1.3, 0.45, -1.2],
-      ].map(([x, y, z], i) => (
-        <group key={`wheel-${i}`} position={[x * scale, y * scale, z * scale]}>
-          <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.45 * scale, 0.45 * scale, 0.3 * scale, 16]} />
-            <meshStandardMaterial color="#1a1a1a" roughness={0.95} />
-          </mesh>
-          {/* Rim */}
-          <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.25 * scale, 0.25 * scale, 0.31 * scale, 16]} />
-            <meshStandardMaterial color="#3a3a3a" metalness={0.4} roughness={0.5} />
-          </mesh>
-        </group>
-      ))}
+      {/* ── Wheels (animated) ── */}
+      <group ref={wheelRef}>
+        {[
+          [1.3, 0.45, 1.2],
+          [1.3, 0.45, -1.2],
+          [-1.3, 0.45, 1.2],
+          [-1.3, 0.45, -1.2],
+        ].map(([x, y, z], i) => (
+          <group key={`wheel-${i}`} position={[x * scale, y * scale, z * scale]}>
+            <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
+              <cylinderGeometry args={[0.45 * scale, 0.45 * scale, 0.3 * scale, 16]} />
+              <meshStandardMaterial color="#1a1a1a" roughness={0.95} />
+            </mesh>
+            {/* Rim */}
+            <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
+              <cylinderGeometry args={[0.25 * scale, 0.25 * scale, 0.31 * scale, 16]} />
+              <meshStandardMaterial color="#3a3a3a" metalness={0.4} roughness={0.5} />
+            </mesh>
+          </group>
+        ))}
+      </group>
 
       {/* ── Front bumper ── */}
       <mesh position={[2.0 * scale, 0.7 * scale, 0]} castShadow>
@@ -292,20 +330,48 @@ export function CombineHarvester({
 /**
  * Agricultural Truck — transport truck with detailed cab, trailer,
  * wheels, and cargo cover
+ * Includes animations: wheel rotation, subtle body vibration
  */
 export function Truck({
   position,
   rotation = [0, 0, 0],
   scale = 1,
   color = "#285c49",
+  animate = false,
 }: {
   position: [number, number, number];
   rotation?: [number, number, number];
   scale?: number;
   color?: string;
+  animate?: boolean;
 }) {
+  const wheelRef = useRef<THREE.Group>(null);
+  const bodyRef = useRef<THREE.Group>(null);
+
+  useFrame((_state, delta) => {
+    if (animate) {
+      // Wheel rotation
+      if (wheelRef.current) {
+        wheelRef.current.children.forEach((child) => {
+          if (child instanceof THREE.Group) {
+            child.children.forEach((mesh) => {
+              if (mesh instanceof THREE.Mesh) {
+                mesh.rotation.x += delta * 2;
+              }
+            });
+          }
+        });
+      }
+      // Subtle body vibration
+      if (bodyRef.current) {
+        bodyRef.current.position.y = Math.sin(Date.now() * 0.008) * 0.01 * scale;
+      }
+    }
+  });
+
   return (
     <group position={position} rotation={rotation}>
+      <group ref={bodyRef}>
       {/* ── Cab ── */}
       <mesh position={[1.5 * scale, 0.9 * scale, 0]} castShadow>
         <boxGeometry args={[1.4 * scale, 1.0 * scale, 1.3 * scale]} />
@@ -370,32 +436,35 @@ export function Truck({
         <meshStandardMaterial color="#3a3a3a" metalness={0.4} />
       </mesh>
 
-      {/* ── Wheels ── */}
-      {[
-        [1.8, 0.3, 0.85],
-        [1.8, 0.3, -0.85],
-        [-0.5, 0.3, 0.85],
-        [-0.5, 0.3, -0.85],
-        [-1.5, 0.3, 0.85],
-        [-1.5, 0.3, -0.85],
-      ].map(([x, y, z], i) => (
-        <group key={`wheel-${i}`} position={[x * scale, y * scale, z * scale]}>
-          <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.32 * scale, 0.32 * scale, 0.22 * scale, 12]} />
-            <meshStandardMaterial color="#1a1a1a" roughness={0.95} />
-          </mesh>
-          <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.18 * scale, 0.18 * scale, 0.23 * scale, 12]} />
-            <meshStandardMaterial color="#4a4a4a" metalness={0.4} roughness={0.5} />
-          </mesh>
-        </group>
-      ))}
+      {/* ── Wheels (animated) ── */}
+      <group ref={wheelRef}>
+        {[
+          [1.8, 0.3, 0.85],
+          [1.8, 0.3, -0.85],
+          [-0.5, 0.3, 0.85],
+          [-0.5, 0.3, -0.85],
+          [-1.5, 0.3, 0.85],
+          [-1.5, 0.3, -0.85],
+        ].map(([x, y, z], i) => (
+          <group key={`wheel-${i}`} position={[x * scale, y * scale, z * scale]}>
+            <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
+              <cylinderGeometry args={[0.32 * scale, 0.32 * scale, 0.22 * scale, 12]} />
+              <meshStandardMaterial color="#1a1a1a" roughness={0.95} />
+            </mesh>
+            <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
+              <cylinderGeometry args={[0.18 * scale, 0.18 * scale, 0.23 * scale, 12]} />
+              <meshStandardMaterial color="#4a4a4a" metalness={0.4} roughness={0.5} />
+            </mesh>
+          </group>
+        ))}
+      </group>
 
       {/* ── Bumper ── */}
       <mesh position={[2.2 * scale, 0.4 * scale, 0]} castShadow>
         <boxGeometry args={[0.08 * scale, 0.2 * scale, 1.4 * scale]} />
         <meshStandardMaterial color="#4a4a4a" metalness={0.4} />
       </mesh>
+      </group>
     </group>
   );
 }
@@ -528,14 +597,36 @@ export function SeedDrill({
 
 /**
  * Irrigation Pump — water pump with pipe
+ * Includes animation: pulsing motor, water flow indicator
  */
 export function IrrigationPump({
   position,
   scale = 1,
+  animate = false,
 }: {
   position: [number, number, number];
   scale?: number;
+  animate?: boolean;
 }) {
+  const motorRef = useRef<THREE.Group>(null);
+  const pipeRef = useRef<THREE.Mesh>(null);
+
+  useFrame((_state, delta) => {
+    if (animate) {
+      // Motor pulsing vibration
+      if (motorRef.current) {
+        motorRef.current.position.y = 1.2 * scale + Math.sin(Date.now() * 0.01) * 0.02 * scale;
+      }
+      // Pipe color pulse to indicate water flow
+      if (pipeRef.current) {
+        const mat = pipeRef.current.material as THREE.MeshStandardMaterial;
+        if (mat) {
+          mat.emissiveIntensity = 0.1 + Math.sin(Date.now() * 0.003) * 0.05;
+        }
+      }
+    }
+  });
+
   return (
     <group position={position}>
       {/* Pump body */}
@@ -543,15 +634,17 @@ export function IrrigationPump({
         <cylinderGeometry args={[0.4 * scale, 0.5 * scale, 1 * scale, 12]} />
         <meshStandardMaterial color="#5a7a8a" roughness={0.5} metalness={0.3} />
       </mesh>
-      {/* Motor on top */}
-      <mesh position={[0, 1.2 * scale, 0]} castShadow>
-        <boxGeometry args={[0.6 * scale, 0.5 * scale, 0.5 * scale]} />
-        <meshStandardMaterial color="#3a5a6a" roughness={0.5} metalness={0.3} />
-      </mesh>
-      {/* Pipe */}
-      <mesh position={[0.8 * scale, 0.8 * scale, 0]} castShadow>
+      {/* Motor on top (animated) */}
+      <group ref={motorRef}>
+        <mesh position={[0, 1.2 * scale, 0]} castShadow>
+          <boxGeometry args={[0.6 * scale, 0.5 * scale, 0.5 * scale]} />
+          <meshStandardMaterial color="#3a5a6a" roughness={0.5} metalness={0.3} />
+        </mesh>
+      </group>
+      {/* Pipe (water flow indicator) */}
+      <mesh ref={pipeRef} position={[0.8 * scale, 0.8 * scale, 0]} castShadow>
         <cylinderGeometry args={[0.08 * scale, 0.08 * scale, 2 * scale, 8]} />
-        <meshStandardMaterial color="#6a8a9a" metalness={0.4} />
+        <meshStandardMaterial color="#6a8a9a" metalness={0.4} emissive="#4a6a7a" emissiveIntensity={0.1} />
       </mesh>
       {/* Base */}
       <mesh position={[0, 0.05 * scale, 0]} castShadow>

@@ -24,7 +24,10 @@ export type NavIcon =
   | "deliveries"
   | "users"
   | "activity"
-  | "settings";
+  | "settings"
+  | "crop"
+  | "inputs"
+  | "suppliers";
 
 export type NavItem = { label: string; href: string; icon: NavIcon };
 
@@ -32,7 +35,10 @@ export const PORTAL_NAV: Record<Role, NavItem[]> = {
   farmer: [
     { label: "Home", href: "/app", icon: "home" },
     { label: "My Farm", href: "/app/farm", icon: "farm" },
+    { label: "Crop Planning", href: "/app/crop-planning", icon: "crop" },
     { label: "Intelligence", href: "/app/intelligence", icon: "spark" },
+    { label: "Inputs", href: "/app/inputs", icon: "inputs" },
+    { label: "Input Requests", href: "/app/input-requests", icon: "suppliers" },
     { label: "Machinery", href: "/app/machinery", icon: "tractor" },
     { label: "People & Services", href: "/app/people", icon: "people" },
     { label: "Harvest & Logistics", href: "/app/harvest", icon: "harvest" },
@@ -63,6 +69,11 @@ export const PORTAL_NAV: Record<Role, NavItem[]> = {
   ],
   operations: [
     { label: "Overview", href: "/operations", icon: "dashboard" },
+    { label: "Crop Planning", href: "/app/crop-planning", icon: "crop" },
+    { label: "Suppliers", href: "/operations/suppliers", icon: "suppliers" },
+    { label: "Procurement", href: "/operations/procurement", icon: "inputs" },
+    { label: "Inventory", href: "/operations/inventory", icon: "devices" },
+    { label: "Fulfilment", href: "/operations/fulfilment", icon: "bookings" },
     { label: "Users", href: "/operations/users", icon: "users" },
     { label: "Platform activity", href: "/operations/activity", icon: "activity" },
     { label: "Settings", href: "/operations/settings", icon: "settings" },

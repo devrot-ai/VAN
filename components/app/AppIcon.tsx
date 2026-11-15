@@ -25,6 +25,7 @@ const PATHS: Record<NavIcon, React.ReactNode> = {
   users: <><circle cx="9" cy="8" r="3" /><path d="M3 20c.6-3.3 2.5-5 6-5s5.4 1.7 6 5" /><path d="M17 8h4M19 6v4" /></>,
   activity: <><path d="M3 12h4l2-6 4 12 2-6h6" /></>,
   settings: <><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" /><path d="m19.4 15 .1.1a2 2 0 1 1-2.8 2.8l-.1-.1M4.6 9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1M9 4.6V4a2 2 0 1 1 4 0v.6M15 19.4v.6a2 2 0 1 1-4 0v-.6M19.4 9l.6-.1a2 2 0 1 1 0-4l-.6.1M4.6 15l-.6.1a2 2 0 1 1 0 4l.6-.1" /></>,
+  crop: <><path d="M12 22V8" /><path d="M5 12H2a10 10 0 0 1 20 0h-3" /><path d="M5 19H2a10 10 0 0 1 4-8M19 19h3a10 10 0 0 0-4-8" /><path d="M8 6c2-2 6-2 8 0" /></>,
 };
 
 export default function AppIcon({ name }: { name: NavIcon }) {

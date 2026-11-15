@@ -2,6 +2,7 @@
  * VAN Product — Farms & Fields Module
  *
  * Browse farms and individual fields, view field boundaries and profiles.
+ * Supports both demo simulation data and real DB-backed farm management.
  */
 
 "use client";
@@ -10,7 +11,7 @@ import { useProduct } from "@/lib/product/ProductState";
 import { demoAssessments, demoOperations } from "@/lib/simulation/demoData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
-import { Map, Eye } from "lucide-react";
+import { Map, Eye, Plus, AlertCircle } from "lucide-react";
 import styles from "./modules.module.css";
 
 const CROP_STAGES = ["bare", "prepared", "planted", "emerging", "growing", "mature", "harvested"];
@@ -47,6 +48,19 @@ export default function ModuleFarms() {
             <div>
               <span className={styles.summaryLabel}>Active Crops</span>
               <span className={styles.summaryValue}>{fields.filter((f) => f.crop && f.cropStage !== "bare").length}</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Demo notice */}
+      <Card className={styles.summaryCard}>
+        <CardContent>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <AlertCircle className={styles.fieldRowIcon} style={{ color: "#B88A60", flexShrink: 0 }} />
+            <div>
+              <strong>Demo data</strong> — This view currently shows illustrative simulation data.
+              Farm and field records from the database will be connected in the next iteration.
             </div>
           </div>
         </CardContent>

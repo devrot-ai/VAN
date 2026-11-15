@@ -70,6 +70,39 @@ export interface NotificationCreatedEvent { notificationId: string; userId: stri
 // Profile events
 export interface ProfileUpdatedEvent { userId: string }
 
+// Agricultural lifecycle events
+export interface FarmCreatedEvent { userId: string; farmId: string }
+export interface FarmUpdatedEvent { userId: string; farmId: string }
+export interface FarmDeletedEvent { userId: string; farmId: string }
+export interface AssessmentCreatedEvent { userId: string; assessmentId: string }
+export interface AssessmentUpdatedEvent { userId: string; assessmentId: string; action?: string }
+export interface AssessmentDeletedEvent { userId: string; assessmentId: string }
+export interface AssessmentApprovedEvent { userId: string; assessmentId: string; action?: string }
+export interface SoilMeasurementAddedEvent { userId: string; assessmentId: string; measurementId: string }
+
+// Crop cycle events
+export interface CropCycleCreatedEvent { userId: string; cropCycleId: string }
+export interface CropCycleUpdatedEvent { userId: string; cropCycleId: string; action?: string }
+export interface CropCycleDeletedEvent { userId: string; cropCycleId: string }
+export interface CropPlanCreatedEvent { userId: string; cropPlanId: string; cropCycleId: string }
+export interface CropPlanUpdatedEvent { userId: string; cropPlanId: string; action?: string }
+export interface CropStageCreatedEvent { userId: string; stageId: string; cropCycleId: string }
+export interface CropStageUpdatedEvent { userId: string; stageId: string; action?: string }
+export interface InputRequirementCreatedEvent { userId: string; requirementId: string; cropCycleId: string }
+export interface InputRequirementUpdatedEvent { userId: string; requirementId: string; action?: string }
+// Sprint 04: Input supply chain events
+export interface InputCatalogueCreatedEvent { userId: string; inputId: string; category: string }
+export interface SupplierCreatedEvent { userId: string; supplierId: string; name: string }
+export interface SupplierProductCreatedEvent { userId: string; supplierProductId: string; supplierId: string; inputId: string }
+export interface InputSupplyRequestCreatedEvent { userId: string; requestId: string; farmId: string }
+export interface InputSupplyRequestSubmittedEvent { userId: string; requestId: string; farmId: string }
+export interface InputSupplyRequestReviewedEvent { userId: string; requestId: string; reviewedBy: string; action: string }
+export interface GoodsReceiptCreatedEvent { userId: string; receiptId: string; orderId: string }
+export interface FulfilmentAllocatedEvent { userId: string; fulfilmentId: string; requestId: string; farmId: string }
+export interface FulfilmentDispatchedEvent { userId: string; fulfilmentId: string; farmId: string }
+export interface FulfilmentDeliveredEvent { userId: string; fulfilmentId: string; farmId: string }
+export interface InventoryMovementCreatedEvent { userId: string; movementId: string; type: string }
+
 /* ---------- Event Type Map ---------- */
 
 export const EVENT_TYPES = {
@@ -104,6 +137,37 @@ export const EVENT_TYPES = {
   BOOKING_RESPONDED: "booking.responded",
   NOTIFICATION_CREATED: "notification.created",
   PROFILE_UPDATED: "profile.updated",
+  // Agricultural lifecycle
+  FARM_CREATED: "farm.created",
+  FARM_UPDATED: "farm.updated",
+  FARM_DELETED: "farm.deleted",
+  ASSESSMENT_CREATED: "assessment.created",
+  ASSESSMENT_UPDATED: "assessment.updated",
+  ASSESSMENT_DELETED: "assessment.deleted",
+  ASSESSMENT_APPROVED: "assessment.approved",
+  SOIL_MEASUREMENT_ADDED: "soil_measurement.added",
+  // Crop cycle events
+  CROP_CYCLE_CREATED: "crop_cycle.created",
+  CROP_CYCLE_UPDATED: "crop_cycle.updated",
+  CROP_CYCLE_DELETED: "crop_cycle.deleted",
+  CROP_PLAN_CREATED: "crop_plan.created",
+  CROP_PLAN_UPDATED: "crop_plan.updated",
+  CROP_STAGE_CREATED: "crop_stage.created",
+  CROP_STAGE_UPDATED: "crop_stage.updated",
+  INPUT_REQUIREMENT_CREATED: "input_requirement.created",
+  INPUT_REQUIREMENT_UPDATED: "input_requirement.updated",
+  // Sprint 04: Input supply chain
+  INPUT_CATALOGUE_CREATED: "input_catalogue.created",
+  SUPPLIER_CREATED: "supplier.created",
+  SUPPLIER_PRODUCT_CREATED: "supplier_product.created",
+  INPUT_SUPPLY_REQUEST_CREATED: "input_supply_request.created",
+  INPUT_SUPPLY_REQUEST_SUBMITTED: "input_supply_request.submitted",
+  INPUT_SUPPLY_REQUEST_REVIEWED: "input_supply_request.reviewed",
+  GOODS_RECEIPT_CREATED: "goods_receipt.created",
+  FULFILMENT_ALLOCATED: "fulfilment.allocated",
+  FULFILMENT_DISPATCHED: "fulfilment.dispatched",
+  FULFILMENT_DELIVERED: "fulfilment.delivered",
+  INVENTORY_MOVEMENT_CREATED: "inventory_movement.created",
 } as const
 
 export type EventType = (typeof EVENT_TYPES)[keyof typeof EVENT_TYPES]
@@ -140,6 +204,37 @@ export interface EventPayloadMap {
   "booking.responded": BookingRespondedEvent
   "notification.created": NotificationCreatedEvent
   "profile.updated": ProfileUpdatedEvent
+  // Agricultural lifecycle
+  "farm.created": FarmCreatedEvent
+  "farm.updated": FarmUpdatedEvent
+  "farm.deleted": FarmDeletedEvent
+  "assessment.created": AssessmentCreatedEvent
+  "assessment.updated": AssessmentUpdatedEvent
+  "assessment.deleted": AssessmentDeletedEvent
+  "assessment.approved": AssessmentApprovedEvent
+  "soil_measurement.added": SoilMeasurementAddedEvent
+  // Crop cycle events
+  "crop_cycle.created": CropCycleCreatedEvent
+  "crop_cycle.updated": CropCycleUpdatedEvent
+  "crop_cycle.deleted": CropCycleDeletedEvent
+  "crop_plan.created": CropPlanCreatedEvent
+  "crop_plan.updated": CropPlanUpdatedEvent
+  "crop_stage.created": CropStageCreatedEvent
+  "crop_stage.updated": CropStageUpdatedEvent
+  "input_requirement.created": InputRequirementCreatedEvent
+  "input_requirement.updated": InputRequirementUpdatedEvent
+  // Sprint 04: Input supply chain
+  "input_catalogue.created": InputCatalogueCreatedEvent
+  "supplier.created": SupplierCreatedEvent
+  "supplier_product.created": SupplierProductCreatedEvent
+  "input_supply_request.created": InputSupplyRequestCreatedEvent
+  "input_supply_request.submitted": InputSupplyRequestSubmittedEvent
+  "input_supply_request.reviewed": InputSupplyRequestReviewedEvent
+  "goods_receipt.created": GoodsReceiptCreatedEvent
+  "fulfilment.allocated": FulfilmentAllocatedEvent
+  "fulfilment.dispatched": FulfilmentDispatchedEvent
+  "fulfilment.delivered": FulfilmentDeliveredEvent
+  "inventory_movement.created": InventoryMovementCreatedEvent
 }
 
 /* ---------- Event Bus Singleton ---------- */

@@ -196,6 +196,230 @@ export const PURCHASE_SCHEMA: ValidationSchema = {
   status: { type: "enum", values: ["enquiry", "confirmed", "scheduled", "delivered", "cancelled"] as const },
 }
 
+// --- Agricultural lifecycle schemas ---
+
+export const FARM_SCHEMA: ValidationSchema = {
+  name: { type: "string", minLength: 1, maxLength: 200 },
+  address: { field: { type: "string", maxLength: 500 }, optional: true },
+  totalAreaHa: { type: "number", min: 0.01, max: 1000000 },
+  status: { type: "enum", values: ["active", "inactive", "archived"] as const },
+}
+
+export const CROP_CYCLE_SCHEMA: ValidationSchema = {
+  fieldId: { type: "number", min: 1, integer: true },
+  assessmentId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  cropType: { type: "string", minLength: 1, maxLength: 100 },
+  variety: { field: { type: "string", maxLength: 100 }, optional: true },
+  season: { field: { type: "string", maxLength: 50 }, optional: true },
+  cultivatedAreaHa: { field: { type: "number", min: 0.01, max: 100000 }, optional: true },
+  plannedStartDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedStartDate must be YYYY-MM-DD" }, optional: true },
+  plannedPlantingDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedPlantingDate must be YYYY-MM-DD" }, optional: true },
+  plannedHarvestDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedHarvestDate must be YYYY-MM-DD" }, optional: true },
+  stage: { field: { type: "enum", values: ["planned", "land_preparation", "sowing", "vegetative", "flowering", "maturing", "harvesting", "harvested"] as const }, optional: true },
+  status: { field: { type: "enum", values: ["planned", "active", "harvesting", "harvested", "closed", "cancelled"] as const }, optional: true },
+  notes: { field: { type: "string", maxLength: 2000 }, optional: true },
+}
+
+export const CROP_PLAN_SCHEMA: ValidationSchema = {
+  cropCycleId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  plantingMethod: { field: { type: "string", maxLength: 200 }, optional: true },
+  irrigationApproach: { field: { type: "string", maxLength: 200 }, optional: true },
+  fieldConditions: { field: { type: "string", maxLength: 2000 }, optional: true },
+  planningNotes: { field: { type: "string", maxLength: 5000 }, optional: true },
+  status: { field: { type: "enum", values: ["draft", "submitted", "approved", "cancelled"] as const }, optional: true },
+}
+
+export const CROP_CYCLE_STAGE_SCHEMA: ValidationSchema = {
+  cropCycleId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  stageName: { type: "string", minLength: 1, maxLength: 100 },
+  sequence: { field: { type: "number", min: 0, integer: true }, optional: true },
+  plannedStartDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedStartDate must be YYYY-MM-DD" }, optional: true },
+  plannedEndDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedEndDate must be YYYY-MM-DD" }, optional: true },
+  status: { field: { type: "enum", values: ["planned", "ready", "in_progress", "completed", "cancelled"] as const }, optional: true },
+  description: { field: { type: "string", maxLength: 2000 }, optional: true },
+  responsiblePerson: { field: { type: "string", maxLength: 200 }, optional: true },
+  notes: { field: { type: "string", maxLength: 2000 }, optional: true },
+}
+
+export const INPUT_REQUIREMENT_SCHEMA: ValidationSchema = {
+  cropCycleId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  inputCategory: { type: "string", minLength: 1, maxLength: 100 },
+  productName: { field: { type: "string", maxLength: 200 }, optional: true },
+  plannedQuantity: { field: { type: "number", min: 0.001 }, optional: true },
+  unit: { type: "string", minLength: 1, maxLength: 50 },
+  ratePerHa: { field: { type: "number", min: 0 }, optional: true },
+  plannedApplicationDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedApplicationDate must be YYYY-MM-DD" }, optional: true },
+  intendedPurpose: { field: { type: "string", maxLength: 500 }, optional: true },
+  estimatedUnitPrice: { field: { type: "number", min: 0 }, optional: true },
+  status: { field: { type: "enum", values: ["draft", "planned", "approved", "sent_for_procurement", "partially_fulfilled", "fulfilled", "cancelled"] as const }, optional: true },
+  notes: { field: { type: "string", maxLength: 2000 }, optional: true },
+}
+
+export const ASSESSMENT_SCHEMA: ValidationSchema = {
+  fieldId: { type: "number", min: 1, integer: true },
+  assessmentType: { type: "string", minLength: 1, maxLength: 100 },
+  assessor: { field: { type: "string", maxLength: 200 }, optional: true },
+  dataSource: { field: { type: "string", maxLength: 200 }, optional: true },
+  assessmentDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "assessmentDate must be YYYY-MM-DD" }, optional: true },
+  observations: { field: { type: "string", maxLength: 5000 }, optional: true },
+  status: { field: { type: "enum", values: ["draft", "sample_collection", "results_pending", "under_review", "approved", "rejected", "cancelled"] as const }, optional: true },
+}
+
+export const SOIL_MEASUREMENT_SCHEMA: ValidationSchema = {
+  assessmentId: { type: "number", min: 1, integer: true },
+  measurementType: { type: "string", minLength: 1, maxLength: 100 },
+  value: { type: "number" },
+  unit: { type: "string", minLength: 1, maxLength: 50 },
+  sampleId: { field: { type: "string", maxLength: 100 }, optional: true },
+  method: { field: { type: "string", maxLength: 200 }, optional: true },
+  source: { field: { type: "string", maxLength: 200 }, optional: true },
+  referenceRangeMin: { field: { type: "number" }, optional: true },
+  referenceRangeMax: { field: { type: "number" }, optional: true },
+}
+
+export const PROCUREMENT_ORDER_SCHEMA: ValidationSchema = {
+  farmId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  cropCycleId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  supplierId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  estimatedCost: { field: { type: "number", min: 0 }, optional: true },
+  notes: { field: { type: "string", maxLength: 2000 }, optional: true },
+  status: { type: "enum", values: ["draft", "submitted", "approved", "ordered", "partially_received", "received", "rejected", "cancelled"] as const },
+}
+
+export const WORK_ORDER_SCHEMA: ValidationSchema = {
+  farmId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  fieldId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  cropCycleId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  equipmentId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  operatorId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  activityType: { type: "string", minLength: 1, maxLength: 100 },
+  description: { field: { type: "string", maxLength: 2000 }, optional: true },
+  plannedStartDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedStartDate must be YYYY-MM-DD" }, optional: true },
+  plannedEndDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "plannedEndDate must be YYYY-MM-DD" }, optional: true },
+  status: { type: "enum", values: ["draft", "scheduled", "assigned", "in_progress", "completed", "delayed", "cancelled", "failed"] as const },
+}
+
+export const HARVEST_LOT_SCHEMA: ValidationSchema = {
+  cropCycleId: { type: "number", min: 1, integer: true },
+  fieldId: { type: "number", min: 1, integer: true },
+  harvestDate: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "harvestDate must be YYYY-MM-DD" },
+  quantity: { type: "number", min: 0.001 },
+  unit: { type: "enum", values: ["tonnes", "kg", "litres", "quintals"] as const },
+  qualityGrade: { field: { type: "string", maxLength: 50 }, optional: true },
+  moistureContent: { field: { type: "number", min: 0, max: 100 }, optional: true },
+  location: { field: { type: "string", maxLength: 300 }, optional: true },
+  status: { type: "enum", values: ["created", "weighed", "graded", "available", "reserved", "dispatched", "sold"] as const },
+}
+
+// --- Sprint 04: Input supply chain schemas ---
+
+export const INPUT_CATALOGUE_SCHEMA: ValidationSchema = {
+  name: { type: "string", minLength: 1, maxLength: 200 },
+  category: { type: "string", minLength: 1, maxLength: 100 },
+  manufacturer: { field: { type: "string", maxLength: 200 }, optional: true },
+  brand: { field: { type: "string", maxLength: 100 }, optional: true },
+  sku: { field: { type: "string", maxLength: 100 }, optional: true },
+  description: { field: { type: "string", maxLength: 2000 }, optional: true },
+  unit: { type: "string", minLength: 1, maxLength: 50 },
+  packageSize: { field: { type: "number", min: 0.001 }, optional: true },
+  unitPrice: { field: { type: "number", min: 0 }, optional: true },
+  storageConditions: { field: { type: "string", maxLength: 500 }, optional: true },
+  status: { field: { type: "enum", values: ["active", "inactive", "archived"] as const }, optional: true },
+}
+
+export const SUPPLIER_SCHEMA: ValidationSchema = {
+  name: { type: "string", minLength: 1, maxLength: 200 },
+  contactName: { field: { type: "string", maxLength: 200 }, optional: true },
+  email: { field: { type: "string", maxLength: 200, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, patternMessage: "email must be a valid email" }, optional: true },
+  phone: { field: { type: "string", maxLength: 20 }, optional: true },
+  address: { field: { type: "string", maxLength: 500 }, optional: true },
+  supplierType: { field: { type: "string", maxLength: 100 }, optional: true },
+  country: { field: { type: "string", maxLength: 100 }, optional: true },
+  region: { field: { type: "string", maxLength: 100 }, optional: true },
+  terms: { field: { type: "string", maxLength: 2000 }, optional: true },
+  status: { field: { type: "enum", values: ["active", "inactive", "suspended"] as const }, optional: true },
+}
+
+export const SUPPLIER_PRODUCT_SCHEMA: ValidationSchema = {
+  supplierId: { type: "number", min: 1, integer: true },
+  inputId: { type: "number", min: 1, integer: true },
+  supplierSku: { field: { type: "string", maxLength: 100 }, optional: true },
+  packageSize: { field: { type: "number", min: 0.001 }, optional: true },
+  offeredUnit: { type: "string", minLength: 1, maxLength: 50 },
+  unitPrice: { field: { type: "number", min: 0 }, optional: true },
+  currency: { field: { type: "string", maxLength: 10 }, optional: true },
+  minOrderQuantity: { field: { type: "number", min: 0 }, optional: true },
+  availableQuantity: { field: { type: "number", min: 0 }, optional: true },
+  leadTimeDays: { field: { type: "number", min: 0, integer: true }, optional: true },
+  offerValidUntil: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "offerValidUntil must be YYYY-MM-DD" }, optional: true },
+  status: { field: { type: "enum", values: ["active", "inactive", "expired"] as const }, optional: true },
+}
+
+export const INPUT_SUPPLY_REQUEST_SCHEMA: ValidationSchema = {
+  farmId: { type: "number", min: 1, integer: true },
+  cropCycleId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  deliveryLocation: { field: { type: "string", maxLength: 500 }, optional: true },
+  requestedDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "requestedDate must be YYYY-MM-DD" }, optional: true },
+  notes: { field: { type: "string", maxLength: 2000 }, optional: true },
+  status: { field: { type: "enum", values: ["draft", "submitted", "under_review", "accepted", "rejected", "partially_fulfilled", "fulfilled", "cancelled"] as const }, optional: true },
+}
+
+export const INPUT_SUPPLY_REQUEST_ITEM_SCHEMA: ValidationSchema = {
+  requestId: { type: "number", min: 1, integer: true },
+  inputRequirementId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  inputId: { type: "number", min: 1, integer: true },
+  quantity: { type: "number", min: 0.001 },
+  unit: { type: "string", minLength: 1, maxLength: 50 },
+  requestedDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "requestedDate must be YYYY-MM-DD" }, optional: true },
+  notes: { field: { type: "string", maxLength: 1000 }, optional: true },
+}
+
+export const GOODS_RECEIPT_SCHEMA: ValidationSchema = {
+  procurementOrderId: { type: "number", min: 1, integer: true },
+  receiptDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "receiptDate must be YYYY-MM-DD" }, optional: true },
+  receivingLocation: { field: { type: "string", maxLength: 300 }, optional: true },
+  deliveryReference: { field: { type: "string", maxLength: 200 }, optional: true },
+  batchNumber: { field: { type: "string", maxLength: 100 }, optional: true },
+  expiryDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "expiryDate must be YYYY-MM-DD" }, optional: true },
+  inspectionNotes: { field: { type: "string", maxLength: 2000 }, optional: true },
+}
+
+export const GOODS_RECEIPT_ITEM_SCHEMA: ValidationSchema = {
+  receiptId: { type: "number", min: 1, integer: true },
+  orderItemId: { type: "number", min: 1, integer: true },
+  receivedQuantity: { type: "number", min: 0 },
+  acceptedQuantity: { type: "number", min: 0 },
+  rejectedQuantity: { field: { type: "number", min: 0 }, optional: true },
+  damagedQuantity: { field: { type: "number", min: 0 }, optional: true },
+  unit: { type: "string", minLength: 1, maxLength: 50 },
+  notes: { field: { type: "string", maxLength: 1000 }, optional: true },
+}
+
+export const FULFILMENT_SCHEMA: ValidationSchema = {
+  requestId: { type: "number", min: 1, integer: true },
+  requestItemId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  inputId: { type: "number", min: 1, integer: true },
+  inventoryId: { type: "number", min: 1, integer: true },
+  farmId: { type: "number", min: 1, integer: true },
+  quantity: { type: "number", min: 0.001 },
+  unit: { type: "string", minLength: 1, maxLength: 50 },
+  batchNumber: { field: { type: "string", maxLength: 100 }, optional: true },
+  status: { field: { type: "enum", values: ["allocated", "dispatched", "delivered", "cancelled"] as const }, optional: true },
+  deliveryNotes: { field: { type: "string", maxLength: 2000 }, optional: true },
+}
+
+export const PROCUREMENT_ORDER_ENHANCED_SCHEMA: ValidationSchema = {
+  farmId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  cropCycleId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  supplierId: { field: { type: "number", min: 1, integer: true }, optional: true },
+  expectedDeliveryDate: { field: { type: "string", pattern: /^\d{4}-\d{2}-\d{2}$/, patternMessage: "expectedDeliveryDate must be YYYY-MM-DD" }, optional: true },
+  currency: { field: { type: "string", maxLength: 10 }, optional: true },
+  deliveryDestination: { field: { type: "string", maxLength: 500 }, optional: true },
+  estimatedCost: { field: { type: "number", min: 0 }, optional: true },
+  notes: { field: { type: "string", maxLength: 2000 }, optional: true },
+  status: { field: { type: "enum", values: ["draft", "submitted", "approved", "sent_to_supplier", "partially_received", "received", "rejected", "cancelled", "delayed", "disputed"] as const }, optional: true },
+}
+
 /* ---------- Quick Validate Helper ---------- */
 
 /** Validate data against a schema. Throws with field errors if invalid. */

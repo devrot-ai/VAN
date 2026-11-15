@@ -2,20 +2,38 @@
 
 /**
  * Vegetation — trees, crops, hedgerows, and field workers
+ * Includes ambient animations: tree sway, crop sway, anemometer rotation
  */
+
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 
 /**
  * Simple tree — trunk + canopy
+ * Includes animation: gentle canopy sway
  */
 export function Tree({
   position,
   scale = 1,
   canopyColor = "#3a6b35",
+  animate = false,
 }: {
   position: [number, number, number];
   scale?: number;
   canopyColor?: string;
+  animate?: boolean;
 }) {
+  const canopyRef = useRef<THREE.Group>(null);
+
+  useFrame((_state, delta) => {
+    if (animate && canopyRef.current) {
+      const time = Date.now() * 0.001;
+      canopyRef.current.rotation.z = Math.sin(time * 0.8 + position[0] * 0.5) * 0.03;
+      canopyRef.current.rotation.x = Math.sin(time * 0.6 + position[2] * 0.3) * 0.02;
+    }
+  });
+
   return (
     <group position={position}>
       {/* Trunk */}
@@ -23,19 +41,21 @@ export function Tree({
         <cylinderGeometry args={[0.15 * scale, 0.2 * scale, 2 * scale, 8]} />
         <meshStandardMaterial color="#6b4e2a" roughness={0.9} />
       </mesh>
-      {/* Canopy — layered spheres */}
-      <mesh position={[0, 2.5 * scale, 0]} castShadow>
-        <sphereGeometry args={[1 * scale, 8, 8]} />
-        <meshStandardMaterial color={canopyColor} roughness={0.85} />
-      </mesh>
-      <mesh position={[0.4 * scale, 2.8 * scale, 0.2 * scale]} castShadow>
-        <sphereGeometry args={[0.7 * scale, 8, 8]} />
-        <meshStandardMaterial color={canopyColor} roughness={0.85} />
-      </mesh>
-      <mesh position={[-0.3 * scale, 2.6 * scale, -0.3 * scale]} castShadow>
-        <sphereGeometry args={[0.6 * scale, 8, 8]} />
-        <meshStandardMaterial color={canopyColor} roughness={0.85} />
-      </mesh>
+      {/* Canopy — layered spheres (animated) */}
+      <group ref={canopyRef}>
+        <mesh position={[0, 2.5 * scale, 0]} castShadow>
+          <sphereGeometry args={[1 * scale, 8, 8]} />
+          <meshStandardMaterial color={canopyColor} roughness={0.85} />
+        </mesh>
+        <mesh position={[0.4 * scale, 2.8 * scale, 0.2 * scale]} castShadow>
+          <sphereGeometry args={[0.7 * scale, 8, 8]} />
+          <meshStandardMaterial color={canopyColor} roughness={0.85} />
+        </mesh>
+        <mesh position={[-0.3 * scale, 2.6 * scale, -0.3 * scale]} castShadow>
+          <sphereGeometry args={[0.6 * scale, 8, 8]} />
+          <meshStandardMaterial color={canopyColor} roughness={0.85} />
+        </mesh>
+      </group>
     </group>
   );
 }
@@ -71,6 +91,7 @@ export function Hedgerow({
 
 /**
  * Crop plants — small instanced plants for a field
+ * Includes animation: gentle sway in wind
  */
 export function CropPlants({
   position,
@@ -78,20 +99,30 @@ export function CropPlants({
   cols = 10,
   height = 0.4,
   color = "#5a9a4a",
+  animate = false,
 }: {
   position: [number, number, number];
   rows?: number;
   cols?: number;
   height?: number;
   color?: string;
+  animate?: boolean;
 }) {
+  const groupRef = useRef<THREE.Group>(null);
   const rowSpacing = 1.5;
   const colSpacing = 1.2;
   const totalW = (cols - 1) * colSpacing;
   const totalD = (rows - 1) * rowSpacing;
 
+  useFrame((_state, delta) => {
+    if (animate && groupRef.current) {
+      const time = Date.now() * 0.001;
+      groupRef.current.rotation.z = Math.sin(time * 1.2 + position[0] * 0.3) * 0.04;
+    }
+  });
+
   return (
-    <group position={position}>
+    <group position={position} ref={groupRef}>
       {Array.from({ length: rows }).map((_, r) =>
         Array.from({ length: cols }).map((_, c) => (
           <group
@@ -125,23 +156,34 @@ export function CropPlants({
 
 /**
  * Mature crop — taller, golden wheat-like plants
+ * Includes animation: gentle sway in wind
  */
 export function MatureCrop({
   position,
   rows = 6,
   cols = 10,
+  animate = false,
 }: {
   position: [number, number, number];
   rows?: number;
   cols?: number;
+  animate?: boolean;
 }) {
+  const groupRef = useRef<THREE.Group>(null);
   const rowSpacing = 1.5;
   const colSpacing = 1.2;
   const totalW = (cols - 1) * colSpacing;
   const totalD = (rows - 1) * rowSpacing;
 
+  useFrame((_state, delta) => {
+    if (animate && groupRef.current) {
+      const time = Date.now() * 0.001;
+      groupRef.current.rotation.z = Math.sin(time * 1.0 + position[0] * 0.3) * 0.05;
+    }
+  });
+
   return (
-    <group position={position}>
+    <group position={position} ref={groupRef}>
       {Array.from({ length: rows }).map((_, r) =>
         Array.from({ length: cols }).map((_, c) => (
           <group
@@ -242,12 +284,23 @@ export function WaterChannel({
 
 /**
  * Weather station — anemometer + sensor mast
+ * Includes animation: anemometer cups rotation
  */
 export function WeatherStation({
   position,
+  animate = false,
 }: {
   position: [number, number, number];
+  animate?: boolean;
 }) {
+  const anemometerRef = useRef<THREE.Group>(null);
+
+  useFrame((_state, delta) => {
+    if (animate && anemometerRef.current) {
+      anemometerRef.current.rotation.y += delta * 5;
+    }
+  });
+
   return (
     <group position={position}>
       {/* Mast */}
@@ -255,11 +308,20 @@ export function WeatherStation({
         <cylinderGeometry args={[0.05, 0.08, 5, 8]} />
         <meshStandardMaterial color="#8a8a8a" metalness={0.5} />
       </mesh>
-      {/* Anemometer cups */}
-      <mesh position={[0, 5, 0]} castShadow>
-        <sphereGeometry args={[0.3, 8, 8]} />
-        <meshStandardMaterial color="#c0c0c0" metalness={0.4} />
-      </mesh>
+      {/* Anemometer cups (animated) */}
+      <group ref={anemometerRef} position={[0, 5, 0]} castShadow>
+        <mesh>
+          <sphereGeometry args={[0.3, 8, 8]} />
+          <meshStandardMaterial color="#c0c0c0" metalness={0.4} />
+        </mesh>
+        {/* Cup arms */}
+        {[0, Math.PI / 2, Math.PI, Math.PI * 1.5].map((angle, i) => (
+          <mesh key={i} position={[Math.cos(angle) * 0.25, 0, Math.sin(angle) * 0.25]}>
+            <sphereGeometry args={[0.06, 6, 6]} />
+            <meshStandardMaterial color="#e0e0e0" metalness={0.3} />
+          </mesh>
+        ))}
+      </group>
       {/* Sensor box */}
       <mesh position={[0.15, 3.5, 0]} castShadow>
         <boxGeometry args={[0.3, 0.4, 0.2]} />

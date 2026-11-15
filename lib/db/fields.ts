@@ -6,6 +6,10 @@ export function listFields(userId: number) {
   return getDb().prepare(`SELECT * FROM fields WHERE user_id = ? ORDER BY name`).all(userId) as FieldRow[];
 }
 
+export function listFieldsByFarm(farmId: number) {
+  return getDb().prepare(`SELECT * FROM fields WHERE farm_id = ? ORDER BY name`).all(farmId) as FieldRow[];
+}
+
 export function getFieldById(id: number): FieldRow | undefined {
   return getDb().prepare("SELECT * FROM fields WHERE id = ?").get(id) as FieldRow | undefined;
 }
@@ -16,14 +20,15 @@ export const createField = withAuditCreate(
     userId: number;
     name: string;
     areaHa: number;
+    farmId?: number | null;
     crop?: string | null;
     status?: string | null;
     notes?: string | null;
   }): FieldRow => {
     const db = getDb();
     const info = db
-      .prepare("INSERT INTO fields (user_id, name, area_ha, crop, status, notes) VALUES (?,?,?,?,?,?)")
-      .run(input.userId, input.name, input.areaHa, input.crop ?? null, input.status ?? null, input.notes ?? null);
+      .prepare("INSERT INTO fields (user_id, name, area_ha, farm_id, crop, status, notes) VALUES (?,?,?,?,?,?,?)")
+      .run(input.userId, input.name, input.areaHa, input.farmId ?? null, input.crop ?? null, input.status ?? null, input.notes ?? null);
     return getFieldById(Number(info.lastInsertRowid))!;
   },
   (input) => input.userId,

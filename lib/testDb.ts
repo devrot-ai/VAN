@@ -61,7 +61,42 @@ export function createTestUser(
  * Clear all data from the test database while keeping the schema.
  */
 export function clearTestDb(db: DatabaseSync) {
+  // Order matters: delete child tables before parent tables to avoid FK violations
   const tables = [
+    // Lifecycle tables (children first)
+    "shipment_lots",
+    "sales",
+    "shipments",
+    "buyer_orders",
+    "buyers",
+    "storage_movements",
+    "storage_locations",
+    "processing_records",
+    "facilities",
+    "harvest_lots",
+    "work_orders",
+    "operators",
+    "inventory_movements",
+    "inventory",
+    "procurement_order_items",
+    "procurement_orders",
+    "suppliers",
+    "input_catalogue",
+    "soil_measurements",
+    "assessments",
+    "input_requirements",
+    "crop_cycle_stages",
+    "crop_plans",
+    "crop_cycles",
+    "farms",
+    // Sprint 04: Input supply chain tables
+    "fulfilment_records",
+    "goods_receipt_items",
+    "goods_receipts",
+    "input_supply_request_items",
+    "input_supply_requests",
+    "supplier_products",
+    // Original tables (children first)
     "notifications",
     "harvests",
     "maintenance",

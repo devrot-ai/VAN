@@ -8,6 +8,7 @@ export interface FarmFieldItem {
   id: number;
   name: string;
   area_ha: number;
+  farm_id: number | null;
   crop: string | null;
   status: string | null;
 }
@@ -48,6 +49,7 @@ export function presentFarmPage(
       id: f.id,
       name: f.name,
       area_ha: f.area_ha,
+      farm_id: f.farm_id,
       crop: f.crop,
       status: f.status,
     })),

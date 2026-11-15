@@ -8,6 +8,7 @@ const { GET, POST, PUT, DELETE } = createServiceCrudRoute({
   createFields: [
     { name: "name", type: "text", required: true, maxLength: 120 },
     { name: "areaHa", type: "number", required: true, min: 0.01 },
+    { name: "farmId", type: "integer" },
     { name: "crop", type: "text", maxLength: 120 },
     { name: "status", type: "text", maxLength: 60 },
     { name: "notes", type: "text", maxLength: 500 },
@@ -15,6 +16,7 @@ const { GET, POST, PUT, DELETE } = createServiceCrudRoute({
   updateFields: [
     { name: "name", type: "text", required: true, maxLength: 120 },
     { name: "areaHa", type: "number", min: 0.01 },
+    { name: "farmId", type: "integer" },
     { name: "crop", type: "text", maxLength: 120 },
     { name: "status", type: "text", maxLength: 60 },
     { name: "notes", type: "text", maxLength: 500 },

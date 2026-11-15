@@ -7,16 +7,19 @@ import { Card, CardContent } from "@/components/ui/Card";
 
 /**
  * Inline edit form for a field record.
+ * Supports farm reassignment with validation.
  * Called with the current field data and a cancel callback.
  */
 export default function EditFieldForm({
   id,
   initial,
   onCancel,
+  farms,
 }: {
   id: number;
-  initial: { name: string; areaHa: number; crop: string; status: string; notes: string };
+  initial: { name: string; areaHa: number; crop: string; status: string; notes: string; farmId?: number | null };
   onCancel: () => void;
+  farms?: Array<{ id: number; name: string }>;
 }) {
   const { form, setField, error, saved, loading, onSubmit } = useForm({
     endpoint: "/api/fields",
@@ -28,10 +31,15 @@ export default function EditFieldForm({
       crop: initial.crop,
       status: initial.status,
       notes: initial.notes,
+      farmId: initial.farmId ? String(initial.farmId) : "",
     },
-    optionalFields: ["crop", "status", "notes"],
+    optionalFields: ["crop", "status", "notes", "farmId"],
     successMessage: "Field updated.",
   });
+
+  const currentFarmId = initial.farmId;
+  const newFarmId = form.farmId ? Number(form.farmId) : null;
+  const isReassigning = newFarmId !== currentFarmId;
 
   return (
     <Card>
@@ -63,6 +71,23 @@ export default function EditFieldForm({
             value={form.areaHa}
             onChange={(e) => setField("areaHa", e.target.value)}
           />
+          {farms && farms.length > 0 && (
+            <Select
+              label="Farm"
+              value={form.farmId}
+              onChange={(e) => setField("farmId", e.target.value)}
+            >
+              <option value="">Unassigned</option>
+              {farms.map((f) => (
+                <option key={f.id} value={f.id}>{f.name}</option>
+              ))}
+            </Select>
+          )}
+          {isReassigning && (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
+              ⚠ Reassigning this field will preserve all historical assessments and records. Active crop cycles may block reassignment.
+            </div>
+          )}
           <Input
             label="Crop"
             value={form.crop}

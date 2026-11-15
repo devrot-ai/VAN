@@ -62,13 +62,13 @@ export function World({
               data={{ id: "eq-weather-01" }}
               onSelect={onSelectObject}
             >
-              <WeatherStation position={[8, 0, -4]} />
+              <WeatherStation position={[8, 0, -4]} animate />
             </InteractiveObject>
           )}
           <Hedgerow position={[0, 0, -8]} length={18} />
-          <Tree position={[-10, 0, -6]} scale={0.8} />
-          <Tree position={[10, 0, -7]} scale={0.9} />
-          <Tree position={[-8, 0, 6]} scale={0.7} />
+          <Tree position={[-10, 0, -6]} scale={0.8} animate />
+          <Tree position={[10, 0, -7]} scale={0.9} animate />
+          <Tree position={[-8, 0, 6]} scale={0.7} animate />
         </group>
       )}
 
@@ -96,8 +96,8 @@ export function World({
               <Truck position={[-28, 0, 0]} rotation={[0, Math.PI / 2, 0]} scale={0.7} />
             </InteractiveObject>
           )}
-          <Tree position={[-42, 0, 5]} scale={0.7} />
-          <Tree position={[-26, 0, -4]} scale={0.6} />
+          <Tree position={[-42, 0, 5]} scale={0.7} animate />
+          <Tree position={[-26, 0, -4]} scale={0.6} animate />
           {/* Input bags / crates */}
           {[
             [-35, 0.3, 5],
@@ -157,25 +157,25 @@ export function World({
           )}
           <SeedDrill position={[6, 0, 16]} rotation={[0, -0.3, 0]} scale={0.7} />
           {show("irrigation") && <IrrigationPump position={[10, 0, 16]} scale={0.8} />}
-          <Tree position={[-8, 0, 16]} scale={0.6} />
-          <Tree position={[12, 0, 17]} scale={0.7} />
+          <Tree position={[-8, 0, 16]} scale={0.6} animate />
+          <Tree position={[12, 0, 17]} scale={0.7} animate />
         </group>
       )}
 
       {/* ─── Stage 4: Farm Operations (east) ─── */}
       {show("operations") && show("fields") && (
         <group name="stage-operations">
-          <CropPlants position={[10, 0, -10]} rows={5} cols={8} height={0.5} color="#5a9a4a" />
-          <MatureCrop position={[16, 0, -6]} rows={4} cols={6} />
+          <CropPlants position={[10, 0, -10]} rows={5} cols={8} height={0.5} color="#5a9a4a" animate />
+          <MatureCrop position={[16, 0, -6]} rows={4} cols={6} animate />
           <Tractor position={[8, 0, -12]} rotation={[0, 0.5, 0]} scale={0.7} animate />
-          {show("irrigation") && <IrrigationPump position={[18, 0, -14]} scale={0.7} />}
+          {show("irrigation") && <IrrigationPump position={[18, 0, -14]} scale={0.7} animate />}
           {show("irrigation") && <WaterChannel position={[14, 0, -16]} length={10} rotation={0.2} />}
           <FieldWorker position={[6, 0, -8]} color="#c48a47" />
           <FieldWorker position={[12, 0, -14]} color="#728b51" />
-          {show("sensors") && <WeatherStation position={[18, 0, -4]} />}
+          {show("sensors") && <WeatherStation position={[18, 0, -4]} animate />}
           <Hedgerow position={[10, 0, -18]} length={16} />
-          <Tree position={[22, 0, -16]} scale={0.8} />
-          <Tree position={[4, 0, -16]} scale={0.7} />
+          <Tree position={[22, 0, -16]} scale={0.8} animate />
+          <Tree position={[4, 0, -16]} scale={0.7} animate />
         </group>
       )}
 
@@ -189,10 +189,10 @@ export function World({
               data={{ id: "eq-002" }}
               onSelect={onSelectObject}
             >
-              <CombineHarvester position={[-22, 0, -16]} rotation={[0, 0.3, 0]} scale={0.8} />
+              <CombineHarvester position={[-22, 0, -16]} rotation={[0, 0.3, 0]} scale={0.8} animate />
             </InteractiveObject>
           )}
-          {show("logistics") && <Truck position={[-18, 0, -12]} rotation={[0, -0.5, 0]} scale={0.7} />}
+          {show("logistics") && <Truck position={[-18, 0, -12]} rotation={[0, -0.5, 0]} scale={0.7} animate />}
           {show("processing") && onSelectObject && (
             <InteractiveObject
               name="Processing Facility"
@@ -238,8 +238,8 @@ export function World({
           <FieldWorker position={[-24, 0, -14]} color="#c48a47" />
           <FieldWorker position={[-28, 0, -18]} color="#728b51" />
           <Hedgerow position={[-25, 0, -28]} length={16} />
-          <Tree position={[-38, 0, -24]} scale={0.7} />
-          <Tree position={[-14, 0, -26]} scale={0.6} />
+          <Tree position={[-38, 0, -24]} scale={0.7} animate />
+          <Tree position={[-14, 0, -26]} scale={0.6} animate />
         </group>
       )}
 
@@ -256,25 +256,25 @@ export function World({
               <MarketBuilding position={[0, 0, -30]} scale={1} />
             </InteractiveObject>
           )}
-          {show("logistics") && <Truck position={[-6, 0, -28]} rotation={[0, Math.PI / 3, 0]} scale={0.6} />}
-          {show("logistics") && <Truck position={[6, 0, -26]} rotation={[0, -Math.PI / 4, 0]} scale={0.6} />}
+          {show("logistics") && <Truck position={[-6, 0, -28]} rotation={[0, Math.PI / 3, 0]} scale={0.6} animate />}
+          {show("logistics") && <Truck position={[6, 0, -26]} rotation={[0, -Math.PI / 4, 0]} scale={0.6} animate />}
           <Warehouse position={[-8, 0, -34]} scale={0.7} />
-          <Tree position={[-10, 0, -26]} scale={0.6} />
-          <Tree position={[10, 0, -32]} scale={0.7} />
-          <Tree position={[8, 0, -36]} scale={0.6} />
+          <Tree position={[-10, 0, -26]} scale={0.6} animate />
+          <Tree position={[10, 0, -32]} scale={0.7} animate />
+          <Tree position={[8, 0, -36]} scale={0.6} animate />
           <FieldWorker position={[-4, 0, -27]} color="#5f6a61" />
         </group>
       )}
 
       {/* ─── Scenic trees around the perimeter ─── */}
-      <Tree position={[-15, 0, 8]} scale={0.8} />
-      <Tree position={[15, 0, 8]} scale={0.7} />
-      <Tree position={[-20, 0, -5]} scale={0.9} />
-      <Tree position={[20, 0, 5]} scale={0.8} />
-      <Tree position={[-10, 0, -15]} scale={0.7} />
-      <Tree position={[5, 0, -18]} scale={0.6} />
-      <Tree position={[-5, 0, 18]} scale={0.8} />
-      <Tree position={[12, 0, 18]} scale={0.7} />
+      <Tree position={[-15, 0, 8]} scale={0.8} animate />
+      <Tree position={[15, 0, 8]} scale={0.7} animate />
+      <Tree position={[-20, 0, -5]} scale={0.9} animate />
+      <Tree position={[20, 0, 5]} scale={0.8} animate />
+      <Tree position={[-10, 0, -15]} scale={0.7} animate />
+      <Tree position={[5, 0, -18]} scale={0.6} animate />
+      <Tree position={[-5, 0, 18]} scale={0.8} animate />
+      <Tree position={[12, 0, 18]} scale={0.7} animate />
     </group>
   );
 }
